@@ -2,6 +2,7 @@
 #define DRAWMANAGER_H
 
 #include "GameState.h"
+#include "core/TileSet.h"
 
 class DrawManager
 {
@@ -10,6 +11,7 @@ class DrawManager
         void draw();
     private:
         GameState *gameState;
+        TileSet tileSet;
 };
 
 #endif

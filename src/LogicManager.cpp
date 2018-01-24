@@ -1,5 +1,7 @@
 #include "LogicManager.h"
 
+#include "core/TileMap.h"
+
 LogicManager::LogicManager()
 {
     GameState::instance = new GameState();

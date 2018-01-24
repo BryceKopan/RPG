@@ -2,7 +2,8 @@
 
 GameState* GameState::instance;
 
-GameState::GameState()
+GameState::GameState() :
+    tileMap(64,64)
 {
 }
 
