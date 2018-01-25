@@ -3,8 +3,10 @@
 GameState* GameState::instance;
 
 GameState::GameState() :
-    tileMap(64,64)
+    chunk(0, 0, 0, 64, 64)
 {
+    player = new Player(5, 5, 0);
+    chunk.logicMap.map[player->location.x][player->location.y] = player; 
 }
 
 

@@ -1,20 +1,22 @@
 #ifndef TILE_MAP_H
 #define TILE_MAP_H
 
+#include "../CONSTANTS.h"
 #include <allegro5/allegro5.h>
 #include <vector>
 
 class TileMap
 {
     public:
+        int tileWidth, tileHeight;
+
+        TileMap(){};
         TileMap(int tileWidth, int tileHeight);
 
-        int mapXSize = 32, mapYSize = 32, tileWidth, tileHeight;
-
-        int map[32][32] = 
+        int map[CHUNK_SIZE][CHUNK_SIZE] = 
         {
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},

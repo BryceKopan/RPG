@@ -12,6 +12,8 @@ class InputManager
     
     private:
         GameState *gameState;
+
+        void movePlayer(int dX, int dY);
 };
 
 #endif

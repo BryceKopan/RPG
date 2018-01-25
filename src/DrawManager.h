@@ -3,6 +3,7 @@
 
 #include "GameState.h"
 #include "core/TileSet.h"
+#include "allegro5/allegro5.h"
 
 class DrawManager
 {
@@ -12,6 +13,7 @@ class DrawManager
     private:
         GameState *gameState;
         TileSet tileSet;
+        ALLEGRO_TRANSFORM transform;
 };
 
 #endif

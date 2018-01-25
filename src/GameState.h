@@ -1,16 +1,17 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include "core/TileMap.h"
+#include "core/Chunk.h"
+#include "core/Player.h"
 
 class GameState
 {
     public:
-        GameState();
-
         static GameState* instance;
+        Chunk chunk; 
+        Player* player;
 
-        TileMap tileMap;
+        GameState();
     private:
 };
 

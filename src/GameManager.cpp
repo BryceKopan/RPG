@@ -7,11 +7,11 @@
 #include "LogicManager.h"
 #include "DrawManager.h"
 
+#include "CONSTANTS.h"
+
 namespace GameManager
 {
     const int FPS = 60;
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480; 
 
     ALLEGRO_EVENT_QUEUE* eventQueue;
     ALLEGRO_TIMER* timer;
