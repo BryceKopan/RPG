@@ -5,11 +5,21 @@ Agent::Agent (int x, int y, int z) :
 {
 }
 
-void Agent::move(int dX, int dY, GameObject* map[CHUNK_SIZE][CHUNK_SIZE])
+void Agent::move(int dX, int dY, Chunk* chunk)
 {
-    map[location.x + dX][location.y + dY] = map[location.x][location.y];
-    map[location.x][location.y] = NULL;
+    if(chunk->tileMap.map[location.x + dX][location.y + dY] == 1)
+    {    
+    }
+    else if(chunk->logicMap.map[location.x + dX][location.y + dY] != NULL)
+    {
+    }
+    else
+    {
+        chunk->logicMap.map[location.x + dX][location.y + dY] = 
+            chunk->logicMap.map[location.x][location.y];
+        chunk->logicMap.map[location.x][location.y] = NULL;
 
-    location.x += dX;
-    location.y += dY;
+        location.x += dX;
+        location.y += dY;
+    }
 }
