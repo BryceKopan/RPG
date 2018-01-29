@@ -1,10 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "GameObject.h"
+#include "Agent.h"
 #include <allegro5/allegro5.h>
 
-class Player : public GameObject
+class Player : public Agent 
 {
     public:
         Player(int x, int y, int z);

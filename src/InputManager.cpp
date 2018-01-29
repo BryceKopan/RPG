@@ -12,37 +12,23 @@ void InputManager::Process (ALLEGRO_EVENT event)
     {    
         if( event.keyboard.keycode == ALLEGRO_KEY_W)
         {
-            movePlayer(0, -1);
+            gameState->player->move(0, -1, gameState->chunk.logicMap.map); 
         }
         else if( event.keyboard.keycode == ALLEGRO_KEY_A)
         {
-            movePlayer(-1, 0);
+            gameState->player->move(-1, 0, gameState->chunk.logicMap.map); 
         }
         else if( event.keyboard.keycode == ALLEGRO_KEY_S)
         {
-            movePlayer(0, 1);
+            gameState->player->move(0, 1, gameState->chunk.logicMap.map); 
         }
         else if( event.keyboard.keycode == ALLEGRO_KEY_D)
         {
-            movePlayer(1, 0);
+            gameState->player->move(1, 0, gameState->chunk.logicMap.map); 
         }
         else if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
         {
             GameManager::done = true;
         }
     }
-}
-
-void InputManager::movePlayer(int dX, int dY)
-{
-    int playerX = gameState->player->location.x;
-    int playerY = gameState->player->location.y;
-
-    gameState->chunk.logicMap.map[playerX + dX][playerY + dY] = 
-        gameState->chunk.logicMap.map[playerX][playerY];
-
-    gameState->chunk.logicMap.map[playerX][playerY] = NULL;
-
-    gameState->player->location.x += dX;
-    gameState->player->location.y += dY;
 }
