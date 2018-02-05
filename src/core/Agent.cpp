@@ -1,17 +1,40 @@
 #include "Agent.h"
+#include "../GameState.h"
+#include "Chunk.h"
+#include <iostream>
 
-Agent::Agent (int x, int y, int z) :
-    GameObject(x-1, y-1, z, true)
+Agent::Agent (int x, int y, int z, int health) :
+    GameObject(x, y, z, true)
 {
+    this->health = health;
 }
 
-void Agent::move(int dX, int dY, Chunk* chunk)
+void Agent::attacked(int damage)
 {
+    health -= damage;
+    if(GameState::instance->debugMode == true)
+    {
+        std::cout << "Agent Attacked for " << damage << " damage\n";
+        std::cout << "Agent Health " << 
+            health + damage << "->" << health << "\n";
+    } 
+}
+
+void Agent::move(int dX, int dY)
+{
+    Chunk* chunk = &GameState::instance->chunk; 
+
     if(chunk->tileMap.map[location.x + dX][location.y + dY] == 1)
     {    
     }
     else if(chunk->logicMap.map[location.x + dX][location.y + dY] != NULL)
     {
+        if(GameState::instance->debugMode == true)
+        {
+            std::cout << "Agent Attacking \n";
+        }
+
+        chunk->logicMap.map[location.x + dX][location.y + dY]->attacked(1);
     }
     else
     {

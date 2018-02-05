@@ -7,7 +7,7 @@
 class Player : public Agent 
 {
     public:
-        Player(int x, int y, int z);
+        Player(int x, int y, int z, int health);
     private:
 };
 

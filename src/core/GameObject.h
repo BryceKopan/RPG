@@ -12,6 +12,8 @@ class GameObject
         ALLEGRO_BITMAP* sprite;
 
         GameObject(int x, int y, int z, bool collidable);
+
+        virtual void attacked(int damage){};
     private:
 };
 

@@ -83,7 +83,6 @@ namespace GameManager
 
             if (event.type == ALLEGRO_EVENT_TIMER) 
             {
-                logicManager.step();
                 redraw = true;
             }
             else if (event.type == ALLEGRO_EVENT_KEY_DOWN ||
@@ -91,6 +90,7 @@ namespace GameManager
                     event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
             {
                 inputManager.Process(event);
+                logicManager.step();
             }
             else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
             {
