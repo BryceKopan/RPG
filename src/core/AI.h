@@ -6,7 +6,9 @@
 class AI
 {
     public:
-        AI();
+        int detectionRange;
+
+        AI(int detectionRange);
 
         void step(Agent* aiAgent);
     private:
