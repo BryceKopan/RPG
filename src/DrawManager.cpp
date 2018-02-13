@@ -28,7 +28,7 @@ void DrawManager::draw()
         for(int k = 0; k < CHUNK_SIZE; k++)
         {
             al_draw_bitmap(
-                    tileSet.getTileSprite(gameState->chunk.tileMap.map[i][k]),
+                    gameState->chunk.tileMap.tileSet.at(gameState->chunk.tileMap.map[i][k]).sprite,
                     i * tileWidth,
                     k * tileHeight,
                     0);

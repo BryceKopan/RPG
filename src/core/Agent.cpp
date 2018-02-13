@@ -24,7 +24,7 @@ void Agent::move(int dX, int dY)
 {
     Chunk* chunk = &GameState::instance->chunk; 
 
-    if(chunk->tileMap.map[location.x + dX][location.y + dY] == 1)
+    if(chunk->tileMap.tileSet.at(chunk->tileMap.map[location.x + dX][location.y + dY]).collidable)
     {    
     }
     else if(chunk->logicMap.map[location.x + dX][location.y + dY] != NULL)

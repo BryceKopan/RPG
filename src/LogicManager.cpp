@@ -1,11 +1,10 @@
 #include "LogicManager.h"
 #include "core/TileMap.h"   
+#include "GameManager.h"
 #include <iostream>
 
 LogicManager::LogicManager()
 {
-    GameState::instance = new GameState();
-
     gameState = GameState::instance;
 }
 
@@ -35,5 +34,10 @@ void LogicManager::step()
         {
             gameState->npcs[i]->ai.step(gameState->npcs[i]);
         }
+    }
+
+    if(gameState->player->health == 0)
+    {
+        GameManager::isRunning = false;
     }
 }

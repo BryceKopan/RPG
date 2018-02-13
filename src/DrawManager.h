@@ -2,7 +2,6 @@
 #define DRAWMANAGER_H
 
 #include "GameState.h"
-#include "core/TileSet.h"
 #include "allegro5/allegro5.h"
 
 class DrawManager
@@ -11,8 +10,7 @@ class DrawManager
         DrawManager();
         void draw();
     private:
-        GameState *gameState;
-        TileSet tileSet;
+        GameState *gameState; 
         ALLEGRO_TRANSFORM transform;
 };
 

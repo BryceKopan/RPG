@@ -34,7 +34,7 @@ void InputManager::Process (ALLEGRO_EVENT event)
         }
         else if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
         {
-            GameManager::done = true;
+            GameManager::isRunning = false;
         }
     }
 }

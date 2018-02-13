@@ -51,7 +51,7 @@ void AI::step(Agent* aiAgent)
         {
             aiAgent->move(1,-1);
         }
-        else if(player.location.x < aiAgent->location.x &&
+        else if(player.location.x > aiAgent->location.x &&
                 player.location.y == aiAgent->location.y)
         {
             aiAgent->move(1,0);

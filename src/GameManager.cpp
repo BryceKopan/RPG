@@ -3,6 +3,8 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 
+#include "util/TMXParser.h"
+
 #include "InputManager.h"
 #include "LogicManager.h"
 #include "DrawManager.h"
@@ -17,7 +19,7 @@ namespace GameManager
     ALLEGRO_TIMER* timer;
     ALLEGRO_DISPLAY* display;
 
-    bool done;
+    bool isRunning;
 
     void abortGame(const char* message)
     {
@@ -53,20 +55,16 @@ namespace GameManager
         al_register_event_source(eventQueue, al_get_timer_event_source(timer)); 
         al_register_event_source(eventQueue, al_get_display_event_source(display));
 
-        done = false;
+        GameState::instance = new GameState();
+
+        isRunning = true;
     }
 
-    void shutdown()
+    void loadGameData()
     {
-        if (timer)
-            al_destroy_timer(timer);
-
-        if (display)
-            al_destroy_display(display);
-
-        if (eventQueue)
-            al_destroy_event_queue(eventQueue);
-    }
+        TMXParser tmxParser;
+        tmxParser.parseTMXFile("res/StartTemple.tmx", GameState::instance);
+    } 
 
     void gameLoop()
     {
@@ -76,7 +74,7 @@ namespace GameManager
         bool redraw = true;
         al_start_timer(timer);
 
-        while(!done)
+        while(isRunning)
         {
             ALLEGRO_EVENT event;
             al_wait_for_event(eventQueue, &event);
@@ -94,7 +92,7 @@ namespace GameManager
             }
             else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
             {
-                done = true;
+                isRunning = false;
             }
             
             if (redraw && al_is_event_queue_empty(eventQueue))
@@ -107,5 +105,17 @@ namespace GameManager
                 al_flip_display();
             }
         }
+    }
+
+    void shutdown()
+    {
+        if (timer)
+            al_destroy_timer(timer);
+
+        if (display)
+            al_destroy_display(display);
+
+        if (eventQueue)
+            al_destroy_event_queue(eventQueue);
     }
 }
