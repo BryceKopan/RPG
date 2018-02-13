@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "CONSTANTS.h"
 #include <iostream>
+#include <allegro5/allegro_ttf.h>
 
 DrawManager::DrawManager()
 {
@@ -14,6 +15,13 @@ void DrawManager::draw()
     int playerY = gameState->player->location.y;
     int tileWidth = gameState->chunk.tileMap.tileWidth;
     int tileHeight = gameState->chunk.tileMap.tileHeight;
+
+    //font = al_load_ttf_font("res/fonts/merienda/Merienda-Regular.ttf", 72, 0);
+
+    //if(!font)
+    //{
+    //    std::cout << "Error loading font\n";
+    //}
 
     al_identity_transform(&transform);
     al_translate_transform(&transform, 

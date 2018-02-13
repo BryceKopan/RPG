@@ -3,17 +3,15 @@
 
 #include <allegro5/allegro5.h>
 #include "GameState.h" 
+#include "LogicManager.h"
 
 class InputManager
 {
     public:
         InputManager();
-        void Process(ALLEGRO_EVENT);
-    
+        void Process(ALLEGRO_EVENT, LogicManager* logicManager);
     private:
         GameState *gameState;
-
-        void movePlayer(int dX, int dY);
 };
 
 #endif

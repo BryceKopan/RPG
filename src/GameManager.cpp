@@ -2,6 +2,8 @@
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
 #include "util/TMXParser.h"
 
@@ -32,11 +34,17 @@ namespace GameManager
         if (!al_init())
             abortGame("Failed to initialize allegro");
 
-        if (!al_install_keyboard())
-            abortGame("Failed to install keyboard");
-
         if (!al_init_image_addon())
-            abortGame("Failed to initialize allegro image addon");
+            abortGame("Failed to initialize image addon");
+
+        //if(!al_init_font_addon())
+        //    abortGame("Failed to initialize font addon");
+
+        //if(!al_init_ttf_addon())
+        //    abortGame("Failed to initialize ttf addon");
+
+        if(!al_install_keyboard())
+            abortGame("Failed to install keyboard");
 
         timer = al_create_timer(1.0 / FPS);
         if (!timer)
@@ -87,8 +95,7 @@ namespace GameManager
                     event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN ||
                     event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
             {
-                inputManager.Process(event);
-                logicManager.step();
+                inputManager.Process(event, &logicManager);
             }
             else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
             {
