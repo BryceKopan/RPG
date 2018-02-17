@@ -1,8 +1,9 @@
 #include "NPC.h"
+#include "../ResourceManager.h"
 
 NPC::NPC(int x, int y, int z, int health) :
-    Agent(x, y, z, health),
+    Agent(x, y, z, health, DamageSource(1, 2, 0, 0)),
     ai(3)
 {
-    sprite = al_load_bitmap("res/NPC.png");
+    sprite = ResourceManager::loadBitmap("res/NPC.png");
 }

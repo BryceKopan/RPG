@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../CONSTANTS.h"
 #include "../core/NPC.h"
+#include "../core/DamageSource.h"
 
 TMXParser::TMXParser()
 {
@@ -91,12 +92,12 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
                 break;
 
             case 8:
-                gameState->player = new Player(x, y, 0, 5);
+                gameState->player = new Player(x, y, 0, 10);
                 gameState->chunk.logicMap.map[x][y] = gameState->player;
                 break;
 
             case 9:
-                gameState->npcs.push_back(new NPC(x, y, 0, 2));
+                gameState->npcs.push_back(new NPC(x, y, 0, 5)); 
                 gameState->chunk.logicMap.map[x][y] = 
                     gameState->npcs.at(gameState->npcs.size() - 1);
                 break;    
