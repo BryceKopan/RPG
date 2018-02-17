@@ -37,11 +37,11 @@ namespace GameManager
         if (!al_init_image_addon())
             abortGame("Failed to initialize image addon");
 
-        //if(!al_init_font_addon())
-        //    abortGame("Failed to initialize font addon");
+        if(!al_init_font_addon())
+            abortGame("Failed to initialize font addon");
 
-        //if(!al_init_ttf_addon())
-        //    abortGame("Failed to initialize ttf addon");
+        if(!al_init_ttf_addon())
+            abortGame("Failed to initialize ttf addon");
 
         if(!al_install_keyboard())
             abortGame("Failed to install keyboard");

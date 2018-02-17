@@ -3,10 +3,19 @@
 #include "CONSTANTS.h"
 #include <iostream>
 #include <allegro5/allegro_ttf.h>
+#include <sstream>
 
 DrawManager::DrawManager()
 {
     gameState = GameState::instance;
+
+    font = al_load_ttf_font("res/fonts/merienda/Merienda-Regular.ttf", 72, 0);
+
+    if(!font)
+    {
+        std::cout << "Error loading font\n";
+    }
+
 }
 
 void DrawManager::draw()
@@ -15,13 +24,6 @@ void DrawManager::draw()
     int playerY = gameState->player->location.y;
     int tileWidth = gameState->chunk.tileMap.tileWidth;
     int tileHeight = gameState->chunk.tileMap.tileHeight;
-
-    //font = al_load_ttf_font("res/fonts/merienda/Merienda-Regular.ttf", 72, 0);
-
-    //if(!font)
-    //{
-    //    std::cout << "Error loading font\n";
-    //}
 
     al_identity_transform(&transform);
     al_translate_transform(&transform, 
@@ -51,5 +53,21 @@ void DrawManager::draw()
             }
         }
     }
+
+    al_identity_transform(&transform);
+    al_use_transform(&transform);
+
+    std::ostringstream health;
+    std::ostringstream turnNumber;
+
+    health << gameState->player->currentHealth << "/" << gameState->player->maxHealth;
+
+    turnNumber << gameState->turnNumber;
+
+    int i = 0;
+
+    al_draw_text(font, al_map_rgb(0, 225, 0), 25, i, ALLEGRO_ALIGN_LEFT, health.str().c_str());
+
+    al_draw_text(font, al_map_rgb(255, 225, 225), 615, i, ALLEGRO_ALIGN_RIGHT, turnNumber.str().c_str());
 }
 
