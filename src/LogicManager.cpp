@@ -16,10 +16,10 @@ void LogicManager::step()
         {
             std::cout << "Stepping agent " << i << "\n";
             std::cout << "Agent " << i << " health is " <<
-                gameState->npcs[i]->health << "\n";
+                gameState->npcs[i]->currentHealth << "\n";
         }  
 
-        if(gameState->npcs[i]->health == 0)
+        if(gameState->npcs[i]->currentHealth <= 0)
         {
             if(gameState->debugMode == true)
             {
@@ -36,7 +36,13 @@ void LogicManager::step()
         }
     }
 
-    if(gameState->player->health == 0)
+    gameState->turnNumber += 1;
+
+    if(gameState->turnNumber % 5 == 0 && 
+            gameState->player->currentHealth < gameState->player->maxHealth)
+        gameState->player->currentHealth += 1;
+
+    if(gameState->player->currentHealth == 0)
     {
         GameManager::isRunning = false;
     }

@@ -45,7 +45,6 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                 break;
                 
             case ALLEGRO_KEY_PAD_5:
-                gameState->player->move(0, 0); 
                 logicManager->step();
                 break;
 
