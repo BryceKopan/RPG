@@ -14,6 +14,7 @@ class GameState
         std::vector<NPC*> npcs;
         Player* player;
         bool debugMode = false;
+        int turnNumber = 0;
 
         GameState();
     private:

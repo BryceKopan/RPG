@@ -6,12 +6,14 @@
 class Agent : public GameObject
 {
     public:
-        int health;
+        int currentHealth, maxHealth, hitChance = 80, armor = 0, dodge = 0;;
 
-        Agent(int x, int y, int z, int health);
+        DamageSource damageSource;
+
+        Agent(int x, int y, int z, int maxHealth, DamageSource damageSource);
 
         void move(int dX, int dY);
-        void attacked(int damage);
+        void attacked(DamageSource damageSource, int hitChance);
     private:
 };
 
