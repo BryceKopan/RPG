@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "Agent.h"
-#include <allegro5/allegro5.h>
 
 class Player : public Agent 
 {

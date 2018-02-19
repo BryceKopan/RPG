@@ -5,6 +5,7 @@
 #include "core/Player.h"
 #include <vector>
 #include "core/NPC.h"
+#include "graphic/ParticlePool.h"
 
 class GameState
 {
@@ -15,6 +16,7 @@ class GameState
         Player* player;
         bool debugMode = false;
         int turnNumber = 0;
+        ParticlePool particlePool;
 
         GameState();
     private:

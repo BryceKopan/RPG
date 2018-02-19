@@ -89,6 +89,7 @@ namespace GameManager
 
             if (event.type == ALLEGRO_EVENT_TIMER) 
             {
+                logicManager.update();
                 redraw = true;
             }
             else if (event.type == ALLEGRO_EVENT_KEY_DOWN ||

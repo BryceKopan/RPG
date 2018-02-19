@@ -47,3 +47,7 @@ void LogicManager::step()
         GameManager::isRunning = false;
     }
 }
+
+void LogicManager::update()
+{
+}

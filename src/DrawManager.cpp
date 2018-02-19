@@ -4,18 +4,13 @@
 #include <iostream>
 #include <allegro5/allegro_ttf.h>
 #include <sstream>
+#include "ResourceManager.h"
 
 DrawManager::DrawManager()
 {
     gameState = GameState::instance;
 
-    font = al_load_ttf_font("res/fonts/merienda/Merienda-Regular.ttf", 72, 0);
-
-    if(!font)
-    {
-        std::cout << "Error loading font\n";
-    }
-
+    font = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 72);
 }
 
 void DrawManager::draw()

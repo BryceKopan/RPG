@@ -9,6 +9,7 @@ class LogicManager
         LogicManager();
 
         void step();
+        void update();
     private:
         GameState *gameState;
 };
