@@ -3,6 +3,7 @@
 #include "../GameState.h"
 #include <iostream>
 #include <stdlib.h>
+#include <sstream>
 
 Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     GameObject(x, y, z, true)
@@ -14,6 +15,7 @@ Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
 
 void Agent::attacked(DamageSource damageSource, int hitChance)
 {
+    //Calculate and apply hitchance, damage
     int damage = 0;
 
     hitChance += damageSource.accuracy * 5 - dodge * 5;
@@ -32,6 +34,20 @@ void Agent::attacked(DamageSource damageSource, int hitChance)
 
         std::cout << "Damage: " << damage << "Health: " << currentHealth <<"\n";
     } 
+
+    //Create particle that shows damage
+    std::ostringstream text;
+
+    if(damage == 0)
+    {
+        text << "miss";
+    }
+    else
+    {
+        text << damage;
+    }
+
+    GameState::instance->textPool.addParticle(location.x * 64 + 32, location.y * 64 - 32, 0, -1, 100, text.str().c_str(), 255, 0, 0);
 }
 
 void Agent::move(int dX, int dY)

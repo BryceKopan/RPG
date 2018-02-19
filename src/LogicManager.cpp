@@ -50,4 +50,5 @@ void LogicManager::step()
 
 void LogicManager::update()
 {
+    gameState->textPool.update();
 }

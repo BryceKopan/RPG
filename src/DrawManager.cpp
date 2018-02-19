@@ -15,11 +15,13 @@ DrawManager::DrawManager()
 
 void DrawManager::draw()
 {
+    //Save Relevent Data
     int playerX = gameState->player->location.x;
     int playerY = gameState->player->location.y;
     int tileWidth = gameState->chunk.tileMap.tileWidth;
     int tileHeight = gameState->chunk.tileMap.tileHeight;
 
+    //Set up transform to set camera over player
     al_identity_transform(&transform);
     al_translate_transform(&transform, 
             (-(playerX + 1) * tileWidth) +
@@ -28,16 +30,19 @@ void DrawManager::draw()
             (GameManager::SCREEN_HEIGHT / 2) + (tileHeight / 2));
     al_use_transform(&transform);
 
+    //Draw Game World
     for(int i = 0; i < CHUNK_SIZE; i++)
     {
         for(int k = 0; k < CHUNK_SIZE; k++)
         {
+            //Draw TileMap
             al_draw_bitmap(
                     gameState->chunk.tileMap.tileSet.at(gameState->chunk.tileMap.map[i][k]).sprite,
                     i * tileWidth,
                     k * tileHeight,
                     0);
 
+            //Draw LogicMap
             if(gameState->chunk.logicMap.map[i][k] != NULL)
             {
                 al_draw_bitmap(
@@ -49,9 +54,26 @@ void DrawManager::draw()
         }
     }
 
+    //Draw Particles
+    for(int i = 0; i < gameState->textPool.particleCount; i++)
+    {
+        TextParticle text = gameState->textPool.pool[i];
+
+        al_draw_text(
+                font, 
+                al_map_rgb(text.r, text.g, text.b), 
+                text.x, 
+                text.y, 
+                ALLEGRO_ALIGN_CENTER, 
+                text.text.c_str());
+    }
+
+    //Remove transform
+    //Everything after this point x and y limited to screen size
     al_identity_transform(&transform);
     al_use_transform(&transform);
 
+    //Draw UI
     std::ostringstream health;
     std::ostringstream turnNumber;
 

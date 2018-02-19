@@ -1,15 +1,15 @@
-#include "ParticlePool.h"
+#include "TextPool.h"
 #include "iostream"
 
-ParticlePool::ParticlePool()
+TextPool::TextPool()
 {
     for(int i = 0; i < POOL_SIZE; i++)
     {
-        pool[i] = Particle();
+        pool[i] = TextParticle();
     }
 }
 
-void ParticlePool::update()
+void TextPool::update()
 {
     for(int i = 0; i < particleCount; i++)
     {
@@ -31,7 +31,7 @@ void ParticlePool::update()
     }
 }
 
-void ParticlePool::addParticle(int x, int y, int dX, int dY, int life, int type)
+void TextPool::addParticle(int x, int y, int dX, int dY, int life, std::string text, int r, int g, int b)
 {
     if(particleCount == POOL_SIZE)
     {
@@ -39,7 +39,7 @@ void ParticlePool::addParticle(int x, int y, int dX, int dY, int life, int type)
     }
     else
     {
-        pool[particleCount].set(x, y, dX, dY, life, type);
+        pool[particleCount].set(x, y, dX, dY, life, text, r, g, b);
         particleCount ++;
     }
 
