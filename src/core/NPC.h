@@ -10,6 +10,8 @@ class NPC : public Agent
         AI ai;
 
         NPC(int x, int y, int z, int health);
+
+        void update();
     private:
 };
 

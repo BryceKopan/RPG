@@ -10,6 +10,8 @@ LogicManager::LogicManager()
 
 void LogicManager::step()
 {
+    gameState->player->update();
+
     for(int i = 0; i < gameState->npcs.size(); i++)
     {
         if(gameState->debugMode == true)
@@ -32,15 +34,11 @@ void LogicManager::step()
         }
         else
         {
-            gameState->npcs[i]->ai.step(gameState->npcs[i]);
+            gameState->npcs[i]->update();
         }
     }
 
     gameState->turnNumber += 1;
-
-    if(gameState->turnNumber % 5 == 0 && 
-            gameState->player->currentHealth < gameState->player->maxHealth)
-        gameState->player->currentHealth += 1;
 
     if(gameState->player->currentHealth == 0)
     {
