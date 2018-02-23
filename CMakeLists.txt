@@ -23,7 +23,7 @@ add_executable(game ${sources})
 include_directories(game PUBLIC ${ALLEGRO_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIRS}) #${Boost_INCLUDE_DIRS})
 target_compile_options(game PUBLIC ${ALLEGRO_CFLAGS_OTHER})
 
-target_link_libraries(game ${ALLEGRO_LIBRARIES} ${PUGIXML_LIBRARIES} allegro_image allegro_font allegro_ttf -lpthread)
+target_link_libraries(game ${ALLEGRO_LIBRARIES} ${PUGIXML_LIBRARIES} allegro_image allegro_font allegro_ttf allegro_primitives -lpthread)
 
 #if(APPLE)
     #target_link_libraries(game ${ALLEGRO_LIBRARIES} ${Boost_LIBRARIES} allegro_image -lallegro_main)

@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 #include <allegro5/allegro5.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
@@ -31,10 +32,13 @@ namespace GameManager
 
     void init()
     {
-        if (!al_init())
+        if(!al_init())
             abortGame("Failed to initialize allegro");
 
-        if (!al_init_image_addon())
+        if(!al_init_primitives_addon())
+            abortGame("Failed to initialize primitives addon");
+
+        if(!al_init_image_addon())
             abortGame("Failed to initialize image addon");
 
         if(!al_init_font_addon())

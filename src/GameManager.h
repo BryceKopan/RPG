@@ -7,8 +7,8 @@
 namespace GameManager
 {
     extern bool isRunning;
-    int const SCREEN_WIDTH = 640;
-    int const SCREEN_HEIGHT = 480;
+    int const SCREEN_WIDTH = 800;
+    int const SCREEN_HEIGHT = 600;
 
     void init();
     void loadGameData();

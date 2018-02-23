@@ -32,7 +32,7 @@ void Agent::attacked(Attack attack)
     }
     else
     {
-        text << "miss";
+        text << "miss\ntest";
     }
 
     //Create particle that shows damage
