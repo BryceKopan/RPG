@@ -14,40 +14,28 @@ Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     attributes = Attributes();
 }
 
-void Agent::attacked(DamageSource damageSource, int hitChance)
+void Agent::attacked(Attack attack)
 {
+    std::ostringstream text;
+
     //reset regen time
     regenTime = 0;
 
-    //Calculate and apply hitchance, damage
-    int damage = 0;
-
-    hitChance += (damageSource.accuracy * 5)
-        - ((dodge + attributes.dexMod) * 5);
+    //Process Attack
+    attack.hitChance -= ((dodge + attributes.dexMod) * 5);
 
     if(rand() % 100 < hitChance)
     {
-        damage = rand() % 
-            (damageSource.maxDamage - damageSource.minDamage + 1) + 
-            damageSource.minDamage;
-        damage += damageSource.bonusDamage;
-        damage -= damage * ((armor * 5) / 100);
-
-        currentHealth -= damage;
-    } 
-
-    //Create particle that shows damage
-    std::ostringstream text;
-
-    if(damage == 0)
-    {
-        text << "miss";
+        attack.damage -= attack.damage * ((armor * 5) / 100);
+        currentHealth -= attack.damage;
+        text << attack.damage;
     }
     else
     {
-        text << damage;
+        text << "miss";
     }
 
+    //Create particle that shows damage
     GameState::instance->textPool.addParticle(location.x * 64 + 32, location.y * 64 - 32, 0, -1, 100, text.str().c_str(), 255, 0, 0);
 }
 
@@ -65,11 +53,9 @@ void Agent::move(int dX, int dY)
             std::cout << "Agent Attacking \n";
         }
 
-        DamageSource attack = damageSource;
-        attack.accuracy += attributes.dexMod;
-        attack.bonusDamage += attributes.strMod;
+        Attack attack(damageSource, hitChance, attributes);
 
-        chunk->logicMap.map[location.x + dX][location.y + dY]->attacked(damageSource, hitChance);
+        chunk->logicMap.map[location.x + dX][location.y + dY]->attacked(attack);
     }
     else
     {

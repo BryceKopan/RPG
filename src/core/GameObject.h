@@ -3,7 +3,7 @@
 
 #include "Location.h"
 #include <allegro5/allegro5.h>
-#include "DamageSource.h"
+#include "Attack.h"
 
 class GameObject
 {
@@ -14,7 +14,7 @@ class GameObject
 
         GameObject(int x, int y, int z, bool collidable);
 
-        virtual void attacked(DamageSource damageSource, int hitChance){};
+        virtual void attacked(Attack Attack){};
     private:
 };
 

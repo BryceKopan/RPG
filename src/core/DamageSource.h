@@ -8,6 +8,8 @@ class DamageSource
 
         DamageSource();
         DamageSource(int minDamage, int maxDamage, int bonusDamage,int armorPen, int accuracy);
+
+        int getDamage();
     private:
 };
 
