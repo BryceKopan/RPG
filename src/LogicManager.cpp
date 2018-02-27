@@ -28,9 +28,11 @@ void LogicManager::step()
                 std::cout << "Destroying Agent " << i << "\n";
             }  
 
+            gameState->npcs[i]->killed();
             gameState->chunk.logicMap.map[gameState->npcs[i]->location.x][gameState->npcs[i]->location.y][0] = NULL;
             delete gameState->npcs[i];
             gameState->npcs.erase(gameState->npcs.begin() + i);
+
         }
         else
         {

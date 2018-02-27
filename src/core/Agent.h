@@ -17,6 +17,7 @@ class Agent : public GameObject
         void move(int dX, int dY);
         bool attacked(Attack attack);
         void update();
+        void killed();
     private:
 };
 

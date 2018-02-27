@@ -1,6 +1,7 @@
 #include "Agent.h"
 #include "Chunk.h"
 #include "../GameState.h"
+#include "BloodSplat.h"
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
@@ -110,4 +111,12 @@ void Agent::update()
         maxHealth += level + attributes.tghMod;
         currentHealth = maxHealth;
     }
+}
+
+void Agent::killed()
+{
+    Chunk* chunk = &GameState::instance->chunk; 
+    
+    chunk->logicMap.map[location.x][location.y][1] =
+        new BloodSplat(location.x, location.y);
 }
