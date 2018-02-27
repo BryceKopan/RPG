@@ -29,6 +29,10 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                     gameState->menu = true;
                     break;
 
+                case ALLEGRO_KEY_L:
+                    gameState->player->currentXP += 100;
+                    break;
+
                 //Numpad Movement
                 case ALLEGRO_KEY_PAD_7:
                     gameState->player->move(-1, -1); 
@@ -86,7 +90,55 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                 case ALLEGRO_KEY_X:
                     gameState->menu = false;
                     break;
+
             }
+            if(gameState->player->attributePoints > 0)
+            {
+                switch(event.keyboard.keycode)
+                {
+                    case ALLEGRO_KEY_DOWN:
+                        gameState->selectedAttribute ++;
+                        if(gameState->selectedAttribute > 5)
+                            gameState->selectedAttribute = 0;
+                        break;
+
+                    case ALLEGRO_KEY_UP:
+                        gameState->selectedAttribute --;
+                        if(gameState->selectedAttribute < 0)
+                            gameState->selectedAttribute = 5;
+                        break;
+
+                    case ALLEGRO_KEY_ENTER:
+                        switch(gameState->selectedAttribute)
+                        {
+                            case 0:
+                                gameState->player->attributes.strength++;
+                                break;
+
+                            case 1:
+                                gameState->player->attributes.dexterity++;
+                                break;
+
+                            case 2:
+                                gameState->player->attributes.toughness++;
+                                break;
+
+                            case 3:
+                                gameState->player->attributes.intelligence++;
+                                break;
+
+                            case 4:
+                                gameState->player->attributes.wisdom++;
+                                break;
+
+                            case 5:
+                                gameState->player->attributes.piety++;
+                                break;
+                        }
+                        gameState->player->attributePoints--;
+                        break;
+                    }
+                }
 
         }
     }

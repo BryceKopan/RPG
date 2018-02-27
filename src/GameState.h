@@ -15,7 +15,7 @@ class GameState
         std::vector<NPC*> npcs;
         Player* player;
         bool debugMode = false, menu = false;
-        int turnNumber = 0;
+        int turnNumber = 0, selectedAttribute = 0;
         TextPool textPool;
 
         GameState();

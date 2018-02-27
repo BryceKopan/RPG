@@ -105,7 +105,7 @@ void DrawManager::draw()
         std::ostringstream uiText;
         Player player = *gameState->player;
 
-        uiText << "Name: ";
+        uiText << "Level: " << player.level;
         menuLines.push_back(uiText.str());
         uiText.str("");
 
@@ -149,6 +149,15 @@ void DrawManager::draw()
                     al_map_rgb(255, 255, 255), 125, 125 + (30 * i),
                     ALLEGRO_ALIGN_LEFT, menuLines.at(i).c_str());
         }
+        
+        if(player.attributePoints > 0)
+        {
+            al_draw_text(font2,
+                    al_map_rgb(255, 255, 255),
+                    120, 215 + (30 * gameState->selectedAttribute),
+                    ALLEGRO_ALIGN_RIGHT, ">"); 
+        }
+
     }
 }
 

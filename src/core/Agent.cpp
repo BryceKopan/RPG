@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include <cmath>
 
 Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     GameObject(x, y, z, true)
@@ -14,7 +15,7 @@ Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     attributes = Attributes();
 }
 
-void Agent::attacked(Attack attack)
+bool Agent::attacked(Attack attack)
 {
     std::ostringstream text;
 
@@ -42,6 +43,15 @@ void Agent::attacked(Attack attack)
             0, -1, 100, 
             text.str().c_str(), 
             255, 0, 0);
+
+    if(currentHealth <= 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void Agent::move(int dX, int dY)
@@ -60,7 +70,11 @@ void Agent::move(int dX, int dY)
 
         Attack attack(damageSource, hitChance, attributes);
 
-        chunk->logicMap.map[location.x + dX][location.y + dY]->attacked(attack);
+        if(chunk->logicMap.map[location.x + dX][location.y + dY]->
+                attacked(attack))
+        {
+            currentXP += 10;
+        }
     }
     else
     {
@@ -81,5 +95,19 @@ void Agent::update()
     {
         currentHealth++;
         regenTime = 0;
+    }
+
+    if (currentXP >= nextLevelXP)
+    {
+        level++;
+        nextLevelXP = std::pow(nextLevelXP, 1.1);
+        if(level % 2 == 0)
+            attributePoints ++;
+
+        if(level % 5 == 0)
+            attributes.globalStatIncrease();
+
+        maxHealth += level + attributes.tghMod;
+        currentHealth = maxHealth;
     }
 }

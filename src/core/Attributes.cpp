@@ -35,6 +35,15 @@ void Attributes::setMods()
     
 }
 
+void Attributes::globalStatIncrease()
+{
+    strength++;
+    dexterity++;
+    toughness++;
+    intelligence++;
+    wisdom++;
+    piety++;
+}
 int Attributes::calculateMod(int stat)
 {
     if(stat >= 10)

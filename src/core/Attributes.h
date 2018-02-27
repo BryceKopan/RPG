@@ -9,6 +9,7 @@ class Attributes
 
         Attributes();
         Attributes(int str, int dex, int tgh, int intt, int wis, int pie);   
+        void globalStatIncrease();
     private:
         void setMods();
         int calculateMod(int stat);
