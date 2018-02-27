@@ -88,17 +88,16 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
         switch(t)
         {
             case 0:
-                gameState->chunk.logicMap.map[x][y] = nullptr;
                 break;
 
             case 8:
                 gameState->player = new Player(x, y, 0, 10);
-                gameState->chunk.logicMap.map[x][y] = gameState->player;
+                gameState->chunk.logicMap.map[x][y][0] = gameState->player;
                 break;
 
             case 9:
                 gameState->npcs.push_back(new NPC(x, y, 0, 5)); 
-                gameState->chunk.logicMap.map[x][y] = 
+                gameState->chunk.logicMap.map[x][y][0] = 
                     gameState->npcs.at(gameState->npcs.size() - 1);
                 break;    
 

@@ -45,13 +45,16 @@ void DrawManager::draw()
                     0);
 
             //Draw LogicMap
-            if(gameState->chunk.logicMap.map[i][k] != NULL)
+            for(int j = gameState->chunk.logicMap.depth - 1; j >= 0; j--)
             {
-                al_draw_bitmap(
-                        gameState->chunk.logicMap.map[i][k]->sprite,
-                        i * tileWidth,
-                        k * tileHeight,
-                        0);
+                if(gameState->chunk.logicMap.map[i][k][j] != NULL)
+                {
+                    al_draw_bitmap(
+                            gameState->chunk.logicMap.map[i][k][j]->sprite,
+                            i * tileWidth,
+                            k * tileHeight,
+                            0);
+                }
             }
         }
     }

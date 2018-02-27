@@ -11,7 +11,8 @@ LogicMap::~LogicMap()
     {
         for(int k = 0; k < CHUNK_SIZE; k++)
         {
-            delete map[i][k];
+            delete map[i][k][0];
+            delete map[i][k][1];
         }
     }
 }

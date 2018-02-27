@@ -10,8 +10,8 @@ class Attributes
         Attributes();
         Attributes(int str, int dex, int tgh, int intt, int wis, int pie);   
         void globalStatIncrease();
-    private:
         void setMods();
+    private:
         int calculateMod(int stat);
 };
 

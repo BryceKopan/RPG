@@ -7,7 +7,9 @@
 class LogicMap
 {
     public:
-        GameObject* map[CHUNK_SIZE][CHUNK_SIZE] = {{NULL}};
+        static const int depth = 2;
+
+        GameObject* map[CHUNK_SIZE][CHUNK_SIZE][depth] = {{{NULL}}};
 
         LogicMap();
         ~LogicMap();

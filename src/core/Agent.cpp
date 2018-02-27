@@ -61,7 +61,7 @@ void Agent::move(int dX, int dY)
     if(chunk->tileMap.tileSet.at(chunk->tileMap.map[location.x + dX][location.y + dY]).collidable)
     {    
     }
-    else if(chunk->logicMap.map[location.x + dX][location.y + dY] != NULL)
+    else if(chunk->logicMap.map[location.x + dX][location.y + dY][0] != NULL)
     {
         if(GameState::instance->debugMode == true)
         {
@@ -70,7 +70,7 @@ void Agent::move(int dX, int dY)
 
         Attack attack(damageSource, hitChance, attributes);
 
-        if(chunk->logicMap.map[location.x + dX][location.y + dY]->
+        if(chunk->logicMap.map[location.x + dX][location.y + dY][0]->
                 attacked(attack))
         {
             currentXP += 10;
@@ -78,9 +78,9 @@ void Agent::move(int dX, int dY)
     }
     else
     {
-        chunk->logicMap.map[location.x + dX][location.y + dY] = 
-            chunk->logicMap.map[location.x][location.y];
-        chunk->logicMap.map[location.x][location.y] = NULL;
+        chunk->logicMap.map[location.x + dX][location.y + dY][0] = 
+            chunk->logicMap.map[location.x][location.y][0];
+        chunk->logicMap.map[location.x][location.y][0] = NULL;
 
         location.x += dX;
         location.y += dY;

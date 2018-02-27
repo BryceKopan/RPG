@@ -136,6 +136,7 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                                 break;
                         }
                         gameState->player->attributePoints--;
+                        gameState->player->attributes.setMods();
                         break;
                     }
                 }
