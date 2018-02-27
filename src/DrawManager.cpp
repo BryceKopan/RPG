@@ -87,7 +87,7 @@ void DrawManager::draw()
 
     al_draw_text(font1, al_map_rgb(0, 255, 0), 25, i, ALLEGRO_ALIGN_LEFT, health.str().c_str());
 
-    al_draw_text(font1, al_map_rgb(255, 255, 255), 615, i, ALLEGRO_ALIGN_RIGHT, turnNumber.str().c_str());
+    al_draw_text(font1, al_map_rgb(255, 255, 255), GameManager::SCREEN_WIDTH - 25, i, ALLEGRO_ALIGN_RIGHT, turnNumber.str().c_str());
 
     //Menu
     if(gameState->menu)
@@ -103,14 +103,45 @@ void DrawManager::draw()
 
         std::vector<std::string> menuLines;
         std::ostringstream uiText;
+        Player player = *gameState->player;
 
         uiText << "Name: ";
         menuLines.push_back(uiText.str());
         uiText.str("");
 
-        uiText << "Health: " << gameState->player->maxHealth <<
-            "/" << gameState->player->currentHealth;
+        uiText << "Health: " << player.currentHealth << "/" << 
+            player.maxHealth;
         menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "XP: " << player.currentXP <<  "/" << 
+            player.nextLevelXP;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "Strength: " << player.attributes.strength;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "Dexterity: " << player.attributes.dexterity;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "Toughness: " << player.attributes.toughness;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "Intelligence: " << player.attributes.intelligence;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "Wisdom: " << player.attributes.wisdom;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+  
+        uiText << "Piety: " << player.attributes.piety;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
 
         for(int i = 0; i < menuLines.size(); i++)
         {

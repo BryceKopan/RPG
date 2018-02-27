@@ -32,11 +32,16 @@ void Agent::attacked(Attack attack)
     }
     else
     {
-        text << "miss\ntest";
+        text << "miss";
     }
 
     //Create particle that shows damage
-    GameState::instance->textPool.addParticle(location.x * 64 + 32, location.y * 64 - 32, 0, -1, 100, text.str().c_str(), 255, 0, 0);
+    GameState::instance->textPool.addParticle(
+            location.x * 64 + 32, 
+            location.y * 64 - 32, 
+            0, -1, 100, 
+            text.str().c_str(), 
+            255, 0, 0);
 }
 
 void Agent::move(int dX, int dY)

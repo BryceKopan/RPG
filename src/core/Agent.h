@@ -8,7 +8,7 @@ class Agent : public GameObject
 {
     public:
         int currentHealth, maxHealth, regenTime;
-        int hitChance = 75, armor = 0, dodge = 0;
+        int hitChance = 75, armor = 0, dodge = 0, currentXP = 0, nextLevelXP = 50;
         DamageSource damageSource;
         Attributes attributes;
 
