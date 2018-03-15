@@ -1,6 +1,7 @@
 #include "InputManager.h"
 #include "GameManager.h"
 #include <iostream>
+#include "core/Weapon.h"
 
 InputManager::InputManager()
 {
@@ -11,7 +12,7 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
 {
     if(event.type == ALLEGRO_EVENT_KEY_DOWN)
     {    
-        if(gameState->menu != true)
+        if(!gameState->menuCharacter && !gameState->menuInventory)
         {
             switch(event.keyboard.keycode)
             {
@@ -26,7 +27,11 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                     break;
 
                 case ALLEGRO_KEY_X:
-                    gameState->menu = true;
+                    gameState->menuCharacter = true;
+                    break;
+
+                case ALLEGRO_KEY_I:
+                    gameState->menuInventory = true;
                     break;
 
                 case ALLEGRO_KEY_L:
@@ -79,18 +84,22 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                     break;
             }
         }
-        else
+        else if(gameState->menuCharacter)
         {
             switch(event.keyboard.keycode)
             {
                 case ALLEGRO_KEY_ESCAPE:
-                    gameState->menu = false;
+                    gameState->menuCharacter = false;
                     break;
 
                 case ALLEGRO_KEY_X:
-                    gameState->menu = false;
+                    gameState->menuCharacter = false;
                     break;
 
+                case ALLEGRO_KEY_TAB:
+                    gameState->menuCharacter = false;
+                    gameState->menuInventory = true;
+                    break;
             }
             if(gameState->player->attributePoints > 0)
             {
@@ -138,9 +147,31 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                         gameState->player->attributePoints--;
                         gameState->player->attributes.setMods();
                         break;
-                    }
                 }
+            }
+        }
+        else if(gameState->menuInventory)
+        {
+            switch(event.keyboard.keycode)
+            {
+                case ALLEGRO_KEY_ESCAPE:
+                    gameState->menuInventory= false;
+                    break;
 
+                case ALLEGRO_KEY_I:
+                    gameState->menuInventory = false;
+                    break;
+
+                case ALLEGRO_KEY_TAB:
+                    gameState->menuInventory = false;
+                    gameState->menuCharacter = true;
+                    break;
+
+                case ALLEGRO_KEY_E:
+                    Weapon* weapon = static_cast<Weapon*>(gameState->player->items.at(0));
+                    weapon->equip(gameState->player);
+                    break;
+            }
         }
     }
 }

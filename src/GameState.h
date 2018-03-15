@@ -14,7 +14,7 @@ class GameState
         Chunk chunk; 
         std::vector<NPC*> npcs;
         Player* player;
-        bool debugMode = false, menu = false;
+        bool debugMode = false, menuCharacter = false, menuInventory = false;
         int turnNumber = 0, selectedAttribute = 0;
         TextPool textPool;
 

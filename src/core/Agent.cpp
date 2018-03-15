@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <cmath>
+#include "Weapon.h"
 
 Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     GameObject(x, y, z, true)
@@ -14,6 +15,7 @@ Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     this->currentHealth = maxHealth;
     this->damageSource = damageSource;
     attributes = Attributes();
+    items.push_back(new Weapon("Sword", weapon, DamageSource(10,10,10,10,10)));
 }
 
 bool Agent::attacked(Attack attack)

@@ -93,7 +93,7 @@ void DrawManager::draw()
     al_draw_text(font1, al_map_rgb(255, 255, 255), GameManager::SCREEN_WIDTH - 25, i, ALLEGRO_ALIGN_RIGHT, turnNumber.str().c_str());
 
     //Menu
-    if(gameState->menu)
+    if(gameState->menuCharacter)
     {
         al_draw_filled_rectangle(90, 90, 
                 GameManager::SCREEN_WIDTH - 90, 
@@ -119,6 +119,11 @@ void DrawManager::draw()
 
         uiText << "XP: " << player.currentXP <<  "/" << 
             player.nextLevelXP;
+        menuLines.push_back(uiText.str());
+        uiText.str("");
+
+        uiText << "Armor: " << player.armor <<
+            " Dodge: " << player.dodge;
         menuLines.push_back(uiText.str());
         uiText.str("");
 
@@ -161,6 +166,35 @@ void DrawManager::draw()
                     ALLEGRO_ALIGN_RIGHT, ">"); 
         }
 
+    }
+    else if(gameState->menuInventory)
+    {
+        al_draw_filled_rectangle(90, 90, 
+                GameManager::SCREEN_WIDTH - 90, 
+                GameManager::SCREEN_HEIGHT - 90, 
+                al_map_rgb(255, 255, 255));
+        al_draw_filled_rectangle(100, 100, 
+                GameManager::SCREEN_WIDTH - 100, 
+                GameManager::SCREEN_HEIGHT - 100, 
+                al_map_rgb(0, 0, 0));
+
+        std::vector<std::string> menuLines;
+        std::ostringstream uiText;
+        Player player = *gameState->player;
+
+        for(int i = 0; i < player.items.size(); i++)
+        {
+            uiText << player.items.at(i)->name;
+            menuLines.push_back(uiText.str());
+            uiText.str("");
+        }
+
+        for(int i = 0; i < menuLines.size(); i++)
+        {
+            al_draw_text(font2, 
+                    al_map_rgb(255, 255, 255), 125, 125 + (30 * i),
+                    ALLEGRO_ALIGN_LEFT, menuLines.at(i).c_str());
+        }
     }
 }
 
