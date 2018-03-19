@@ -1,16 +1,16 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include <allegro5/allegro5.h>
 #include <string>
+#include "Sprite.h"
 
 class Tile
 {
     public:
-        ALLEGRO_BITMAP* sprite;
+        Sprite sprite;
         bool collidable;
 
-        Tile(bool collidable, std::string spritePath);
+        Tile(bool collidable, Sprite sprite);
     private:
 };
 

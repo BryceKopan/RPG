@@ -75,7 +75,7 @@ namespace GameManager
     void loadGameData()
     {
         TMXParser tmxParser;
-        tmxParser.parseTMXFile("res/StartTemple.tmx", GameState::instance);
+        tmxParser.parseTMXFile("res/StartTemple2.tmx", GameState::instance);
     } 
 
     void gameLoop()

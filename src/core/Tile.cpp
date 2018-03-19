@@ -1,14 +1,7 @@
 #include "Tile.h"
-#include <iostream>
-#include "../ResourceManager.h"
 
-Tile::Tile(bool collidable, std::string spritePath)
+Tile::Tile(bool collidable, Sprite sprite)
 {
     this->collidable = collidable;
-    sprite = ResourceManager::loadBitmap(spritePath.c_str());
-
-    if(!sprite)
-    {
-        std::cout << "asdasd";
-    }
+    this->sprite = sprite;
 }

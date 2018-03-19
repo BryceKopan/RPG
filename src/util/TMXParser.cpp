@@ -32,17 +32,24 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
 
     int tileSetSize = currentNode.attribute("tilecount").as_int();
 
-    currentNode = currentNode.child("tile");
+    currentNode = currentNode.child("image");
+
+    std::string pngFilePath = currentNode.attribute("source").value();
+
+    int spriteSheetWidth = currentNode.attribute("width").as_int();
+    int spriteSheetHeight = currentNode.attribute("height").as_int();
+
+    currentNode = currentNode.next_sibling("tile");
 
     bool collidable;
-    std::string pngFilePath;
 
     for(int i = 0; i < tileSetSize; i++)
     {
         collidable = currentNode.child("properties").child("property").attribute("value").as_int();
-        pngFilePath = currentNode.child("image").attribute("source").value();
 
-        Tile tile(collidable, pngFilePath);
+        Sprite sprite(ResourceManager::loadBitmap(pngFilePath));
+
+        Tile tile(collidable, sprite);
         gameState->chunk.tileMap.tileSet.push_back(tile);
 
         currentNode = currentNode.next_sibling("tile");
