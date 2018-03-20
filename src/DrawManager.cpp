@@ -13,6 +13,7 @@ DrawManager::DrawManager()
 
     font1 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 72);
     font2 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 20);
+    font3 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 40);
 }
 
 void DrawManager::draw()
@@ -77,7 +78,7 @@ void DrawManager::draw()
         TextParticle text = gameState->textPool.pool[i];
 
         al_draw_text(
-                font1, 
+                font3, 
                 al_map_rgb(text.r, text.g, text.b), 
                 text.x, 
                 text.y, 

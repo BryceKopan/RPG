@@ -14,8 +14,7 @@ class DrawManager
     private:
         GameState *gameState; 
         ALLEGRO_TRANSFORM transform;
-        ALLEGRO_FONT* font1;
-        ALLEGRO_FONT* font2;
+        ALLEGRO_FONT* font1,* font2,* font3;
 };
 
 #endif

@@ -67,11 +67,6 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
         currentNode = currentNode.next_sibling("tile");
     }
 
-    if(gameState->chunk.tileMap.tileSet.size() != tileSetSize)
-    {
-        std::cout << debugID << "TileSet size is unexpected size\n";
-    }
-
     currentNode = root.child("layer").child("data").child("tile");
 
     int x, y, t;

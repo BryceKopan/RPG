@@ -39,10 +39,13 @@ bool Agent::attacked(Attack attack)
         text << "miss";
     }
 
+    int tileWidth = GameState::instance->chunk.tileMap.tileWidth;
+    int tileHeight = GameState::instance->chunk.tileMap.tileHeight;
+
     //Create particle that shows damage
     GameState::instance->textPool.addParticle(
-            location.x * 64 + 32, 
-            location.y * 64 - 32, 
+            (location.x * tileWidth) + (tileWidth / 2), 
+            (location.y * tileHeight) - (tileHeight / 2), 
             0, -1, 100, 
             text.str().c_str(), 
             255, 0, 0);
