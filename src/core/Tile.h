@@ -10,6 +10,7 @@ class Tile
         Sprite sprite;
         bool collidable;
 
+        Tile();
         Tile(bool collidable, Sprite sprite);
     private:
 };

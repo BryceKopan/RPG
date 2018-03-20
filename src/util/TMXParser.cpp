@@ -3,6 +3,7 @@
 #include "../CONSTANTS.h"
 #include "../core/NPC.h"
 #include "../core/DamageSource.h"
+#include "../ResourceManager.h"
 
 TMXParser::TMXParser()
 {
@@ -23,10 +24,16 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
         std::cout << debugID << "TMX map is not 64 x 64" << "\n";
     }
 
-    gameState->chunk.tileMap.tileWidth = 
-        root.attribute("tilewidth").as_int();
-    gameState->chunk.tileMap.tileHeight = 
-        root.attribute("tileheight").as_int();
+    int tileWidth = root.attribute("tilewidth").as_int();
+    int tileHeight = root.attribute("tileheight").as_int();
+
+    if(tileWidth != tileHeight)
+    {
+        std::cout << debugID << "Warning: Tiles aren't square" << "\n";
+    }
+
+    gameState->chunk.tileMap.tileWidth = tileWidth;
+    gameState->chunk.tileMap.tileHeight = tileHeight;
     
     pugi::xml_node currentNode = root.child("tileset");
 
@@ -36,8 +43,8 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
 
     std::string pngFilePath = currentNode.attribute("source").value();
 
-    int spriteSheetWidth = currentNode.attribute("width").as_int();
-    int spriteSheetHeight = currentNode.attribute("height").as_int();
+    int spriteSheetWidth = currentNode.attribute("width").as_int() / 
+        tileWidth;
 
     currentNode = currentNode.next_sibling("tile");
 
@@ -47,10 +54,15 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
     {
         collidable = currentNode.child("properties").child("property").attribute("value").as_int();
 
-        Sprite sprite(ResourceManager::loadBitmap(pngFilePath));
+        int spriteID = currentNode.attribute("id").as_int();
+        int spriteX = (spriteID % spriteSheetWidth) * tileWidth;
+        int spriteY = (spriteID / spriteSheetWidth) * tileHeight;
+
+        Sprite sprite(ResourceManager::loadBitmap(pngFilePath),
+                spriteX, spriteY);
 
         Tile tile(collidable, sprite);
-        gameState->chunk.tileMap.tileSet.push_back(tile);
+        gameState->chunk.tileMap.tileSet[spriteID] = tile;
 
         currentNode = currentNode.next_sibling("tile");
     }
@@ -73,7 +85,7 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
 
         if(t == 0)//All empty spots are set to tile 0
         {
-            gameState->chunk.tileMap.map[x][y] = 0;
+            gameState->chunk.tileMap.map[x][y] = 31;
         }
         else
         {
@@ -97,12 +109,12 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
             case 0:
                 break;
 
-            case 8:
+            case 64:
                 gameState->player = new Player(x, y, 0, 10);
                 gameState->chunk.logicMap.map[x][y][0] = gameState->player;
                 break;
 
-            case 9:
+            case 63:
                 gameState->npcs.push_back(new NPC(x, y, 0, 5)); 
                 gameState->chunk.logicMap.map[x][y][0] = 
                     gameState->npcs.at(gameState->npcs.size() - 1);
