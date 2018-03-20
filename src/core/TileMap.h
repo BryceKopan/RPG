@@ -3,14 +3,14 @@
 
 #include "../CONSTANTS.h"
 #include <allegro5/allegro5.h>
-#include <vector>
 #include "Tile.h"
+#include <unordered_map>
 
 class TileMap
 {
     public:
         int tileWidth, tileHeight;
-        std::vector<Tile> tileSet;
+        std::unordered_map<int , Tile> tileSet;
 
         TileMap(){};
         TileMap(int tileWidth, int tileHeight);

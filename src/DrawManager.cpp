@@ -33,13 +33,19 @@ void DrawManager::draw()
     al_use_transform(&transform);
 
     //Draw Game World
-    for(int i = 0; i < CHUNK_SIZE; i++)
+    for(int k = 0; k < CHUNK_SIZE; k++)
     {
-        for(int k = 0; k < CHUNK_SIZE; k++)
+        for(int i = 0; i < CHUNK_SIZE; i++)
         {
             //Draw TileMap
-            al_draw_bitmap(
-                    gameState->chunk.tileMap.tileSet.at(gameState->chunk.tileMap.map[i][k]).sprite,
+            Sprite sprite = gameState->chunk.tileMap.tileSet[gameState->chunk.tileMap.map[i][k]].sprite;
+
+            al_draw_bitmap_region(
+                    sprite.spriteSheet,
+                    sprite.spriteSheetX,
+                    sprite.spriteSheetY,
+                    tileWidth,
+                    tileHeight,
                     i * tileWidth,
                     k * tileHeight,
                     0);
@@ -49,8 +55,14 @@ void DrawManager::draw()
             {
                 if(gameState->chunk.logicMap.map[i][k][j] != NULL)
                 {
-                    al_draw_bitmap(
-                            gameState->chunk.logicMap.map[i][k][j]->sprite,
+                    Sprite sprite = gameState->chunk.logicMap.map[i][k][j]->sprite;
+            
+                    al_draw_bitmap_region(
+                            sprite.spriteSheet,
+                            sprite.spriteSheetX,
+                            sprite.spriteSheetY,
+                            tileWidth,
+                            tileHeight,
                             i * tileWidth,
                             k * tileHeight,
                             0);
