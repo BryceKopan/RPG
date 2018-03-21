@@ -1,11 +1,11 @@
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef VIEW_H
+#define VIEW_H
 
 #include <allegro5/allegro5.h>
 #include <vector>
 #include "UIElement.h"
 
-class Scene
+class View
 {
     public:
         virtual void draw() = 0;

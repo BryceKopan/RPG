@@ -6,7 +6,7 @@
 #include <vector>
 #include "core/NPC.h"
 #include "graphic/TextPool.h"
-#include "ui/Scene.h"
+#include "ui/View.h"
 
 class GameState
 {
@@ -18,7 +18,7 @@ class GameState
         bool debugMode = false, menuCharacter = false, menuInventory = false;
         int turnNumber = 0, selectedAttribute = 0;
         TextPool textPool;
-        Scene* currentScene;
+        View* currentView;
 
         GameState();
     private:

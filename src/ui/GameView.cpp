@@ -1,21 +1,20 @@
-#include "GameScene.h"
+#include "GameView.h"
 #include "TextElement.h"
 #include "../ResourceManager.h"
 #include "../GameManager.h"
-#include <sstream>
 #include "../GameState.h"
 
-GameScene::GameScene()
+GameView::GameView()
 {
     ALLEGRO_FONT* font1 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 72);
     int screenWidth = GameManager::SCREEN_WIDTH;
 
     elements.push_back(new TextElement(25, 0, font1, al_map_rgb(0, 255, 0), ALLEGRO_ALIGN_LEFT));
 
-    elements.push_back(new TextElement(screenWidth - 26, 0, font1, al_map_rgb(255, 255, 255), ALLEGRO_ALIGN_RIGHT));
+    elements.push_back(new TextElement(screenWidth - 25, 0, font1, al_map_rgb(255, 255, 255), ALLEGRO_ALIGN_RIGHT));
 }
 
-void GameScene::draw()
+void GameView::draw()
 {
     for(int i = 0; i < elements.size(); i++)
     {
@@ -23,26 +22,19 @@ void GameScene::draw()
     }
 }
 
-void GameScene::update()
+void GameView::update()
 {
     GameState* gameState = GameState::instance;
-    std::ostringstream stream;
 
+    std::string text = std::to_string(gameState->player->currentHealth) + "/" + std::to_string(gameState->player->maxHealth);
     TextElement* textElement = static_cast<TextElement*>(elements.at(0));
-    stream.str("");
-    
-    stream << gameState->player->currentHealth << "/" << gameState->player->maxHealth; 
+    textElement->text = std::to_string(gameState->player->currentHealth) + "/" + std::to_string(gameState->player->maxHealth);
 
-    textElement->text = stream.str();
-
+    text = std::to_string(gameState->turnNumber);
     textElement = static_cast<TextElement*>(elements.at(1));
-    stream.str("");
-
-    stream << gameState->turnNumber;
-
-    textElement->text = stream.str();
+    textElement->text = text;
 }
 
-void GameScene::processInput(ALLEGRO_EVENT event)
+void GameView::processInput(ALLEGRO_EVENT event)
 {
 }

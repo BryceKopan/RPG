@@ -14,7 +14,7 @@
 
 #include "CONSTANTS.h"
 
-#include "ui/GameScene.h"
+#include "ui/GameView.h"
 
 namespace GameManager
 {
@@ -71,7 +71,8 @@ namespace GameManager
 
         GameState::instance = new GameState();
 
-        GameState::instance->currentScene = new GameScene();
+        //Temp
+        GameState::instance->currentView = new GameView();
 
         isRunning = true;
     }

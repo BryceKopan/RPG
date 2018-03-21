@@ -1,12 +1,12 @@
-#ifndef GAME_SCENE_H
-#define GAME_SCENE_H
+#ifndef GAME_VIEW_H
+#define GAME_VIEW_H
 
-#include "Scene.h"
+#include "View.h"
 
-class GameScene : public Scene
+class GameView : public View
 {
     public:
-        GameScene();
+        GameView();
 
         void draw();
         void update();

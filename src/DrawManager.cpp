@@ -92,7 +92,7 @@ void DrawManager::draw()
     al_use_transform(&transform);
 
     //Draw UI
-    gameState->currentScene->draw();
+    gameState->currentView->draw();
 
     //Menu
     if(gameState->menuCharacter)
