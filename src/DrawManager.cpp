@@ -92,18 +92,7 @@ void DrawManager::draw()
     al_use_transform(&transform);
 
     //Draw UI
-    std::ostringstream health;
-    std::ostringstream turnNumber;
-
-    health << gameState->player->currentHealth << "/" << gameState->player->maxHealth;
-
-    turnNumber << gameState->turnNumber;
-
-    int i = 0;
-
-    al_draw_text(font1, al_map_rgb(0, 255, 0), 25, i, ALLEGRO_ALIGN_LEFT, health.str().c_str());
-
-    al_draw_text(font1, al_map_rgb(255, 255, 255), GameManager::SCREEN_WIDTH - 25, i, ALLEGRO_ALIGN_RIGHT, turnNumber.str().c_str());
+    gameState->currentScene->draw();
 
     //Menu
     if(gameState->menuCharacter)

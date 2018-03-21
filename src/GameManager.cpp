@@ -14,6 +14,8 @@
 
 #include "CONSTANTS.h"
 
+#include "ui/GameScene.h"
+
 namespace GameManager
 {
     const int FPS = 60;
@@ -68,6 +70,8 @@ namespace GameManager
         al_register_event_source(eventQueue, al_get_display_event_source(display));
 
         GameState::instance = new GameState();
+
+        GameState::instance->currentScene = new GameScene();
 
         isRunning = true;
     }
