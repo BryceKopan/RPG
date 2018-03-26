@@ -2,6 +2,8 @@
 #include "GameManager.h"
 #include <iostream>
 #include "core/Weapon.h"
+#include "ui/CharacterMenuView.h"
+#include "ui/GameView.h"
 
 InputManager::InputManager()
 {
@@ -28,6 +30,7 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
 
                 case ALLEGRO_KEY_X:
                     gameState->menuCharacter = true;
+                    gameState->currentView = new CharacterMenuView(); 
                     break;
 
                 case ALLEGRO_KEY_I:
@@ -89,11 +92,10 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
             switch(event.keyboard.keycode)
             {
                 case ALLEGRO_KEY_ESCAPE:
-                    gameState->menuCharacter = false;
-                    break;
 
                 case ALLEGRO_KEY_X:
                     gameState->menuCharacter = false;
+                    gameState->currentView = new GameView();
                     break;
 
                 case ALLEGRO_KEY_TAB:

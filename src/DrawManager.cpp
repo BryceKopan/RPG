@@ -97,74 +97,11 @@ void DrawManager::draw()
     //Menu
     if(gameState->menuCharacter)
     {
-        al_draw_filled_rectangle(90, 90, 
-                GameManager::SCREEN_WIDTH - 90, 
-                GameManager::SCREEN_HEIGHT - 90, 
-                al_map_rgb(255, 255, 255));
-        al_draw_filled_rectangle(100, 100, 
-                GameManager::SCREEN_WIDTH - 100, 
-                GameManager::SCREEN_HEIGHT - 100, 
-                al_map_rgb(0, 0, 0));
-
-        std::vector<std::string> menuLines;
-        std::ostringstream uiText;
-        Player player = *gameState->player;
-
-        uiText << "Level: " << player.level;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Health: " << player.currentHealth << "/" << 
-            player.maxHealth;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "XP: " << player.currentXP <<  "/" << 
-            player.nextLevelXP;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Armor: " << player.armor <<
-            " Dodge: " << player.dodge;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Strength: " << player.attributes.strength;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Dexterity: " << player.attributes.dexterity;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Toughness: " << player.attributes.toughness;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Intelligence: " << player.attributes.intelligence;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        uiText << "Wisdom: " << player.attributes.wisdom;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-  
-        uiText << "Piety: " << player.attributes.piety;
-        menuLines.push_back(uiText.str());
-        uiText.str("");
-
-        for(int i = 0; i < menuLines.size(); i++)
-        {
-            al_draw_text(font2, 
-                    al_map_rgb(255, 255, 255), 125, 125 + (30 * i),
-                    ALLEGRO_ALIGN_LEFT, menuLines.at(i).c_str());
-        }
-        
-        if(player.attributePoints > 0)
+        if(gameState->player->attributePoints > 0)
         {
             al_draw_text(font2,
                     al_map_rgb(255, 255, 255),
-                    120, 215 + (30 * gameState->selectedAttribute),
+                    120, 245 + (30 * gameState->selectedAttribute),
                     ALLEGRO_ALIGN_RIGHT, ">"); 
         }
 

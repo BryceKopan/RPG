@@ -28,7 +28,7 @@ void GameView::update()
 
     std::string text = std::to_string(gameState->player->currentHealth) + "/" + std::to_string(gameState->player->maxHealth);
     TextElement* textElement = static_cast<TextElement*>(elements.at(0));
-    textElement->text = std::to_string(gameState->player->currentHealth) + "/" + std::to_string(gameState->player->maxHealth);
+    textElement->text = text;
 
     text = std::to_string(gameState->turnNumber);
     textElement = static_cast<TextElement*>(elements.at(1));
