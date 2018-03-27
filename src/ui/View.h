@@ -8,6 +8,8 @@
 class View
 {
     public:
+        ~View();
+
         virtual void draw() = 0;
         virtual void update() = 0;
         virtual void processInput(ALLEGRO_EVENT event) = 0;

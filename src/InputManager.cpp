@@ -3,6 +3,7 @@
 #include <iostream>
 #include "core/Weapon.h"
 #include "ui/CharacterMenuView.h"
+#include "ui/InventoryMenuView.h"
 #include "ui/GameView.h"
 
 InputManager::InputManager()
@@ -30,11 +31,14 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
 
                 case ALLEGRO_KEY_X:
                     gameState->menuCharacter = true;
+                    delete gameState->currentView;
                     gameState->currentView = new CharacterMenuView(); 
                     break;
 
                 case ALLEGRO_KEY_I:
                     gameState->menuInventory = true;
+                    delete gameState->currentView;
+                    gameState->currentView = new InventoryMenuView();
                     break;
 
                 case ALLEGRO_KEY_L:
@@ -95,12 +99,15 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
 
                 case ALLEGRO_KEY_X:
                     gameState->menuCharacter = false;
+                    delete gameState->currentView;
                     gameState->currentView = new GameView();
                     break;
 
                 case ALLEGRO_KEY_TAB:
                     gameState->menuCharacter = false;
                     gameState->menuInventory = true;
+                    delete gameState->currentView;
+                    gameState->currentView = new InventoryMenuView();
                     break;
             }
             if(gameState->player->attributePoints > 0)
@@ -157,16 +164,18 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
             switch(event.keyboard.keycode)
             {
                 case ALLEGRO_KEY_ESCAPE:
-                    gameState->menuInventory= false;
-                    break;
 
                 case ALLEGRO_KEY_I:
                     gameState->menuInventory = false;
+                    delete gameState->currentView;
+                    gameState->currentView = new GameView();
                     break;
 
                 case ALLEGRO_KEY_TAB:
                     gameState->menuInventory = false;
                     gameState->menuCharacter = true;
+                    delete gameState->currentView;
+                    gameState->currentView = new CharacterMenuView();
                     break;
 
                 case ALLEGRO_KEY_E:

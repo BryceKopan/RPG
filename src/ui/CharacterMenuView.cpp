@@ -34,6 +34,8 @@ CharacterMenuView::CharacterMenuView()
     elements.push_back(new TextElement(125, 365, font1, white, ALLEGRO_ALIGN_LEFT));
 
     elements.push_back(new TextElement(125, 395, font1, white, ALLEGRO_ALIGN_LEFT));
+
+    update();
 }
 
 void CharacterMenuView::draw()
