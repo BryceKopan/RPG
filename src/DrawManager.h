@@ -9,12 +9,11 @@
 class DrawManager
 {
     public:
-        DrawManager();
-        void draw();
+        static void init();
+        static void draw();
     private:
-        GameState *gameState; 
-        ALLEGRO_TRANSFORM transform;
-        ALLEGRO_FONT* font1,* font2,* font3;
+        //static ALLEGRO_TRANSFORM transform;
+        //static ALLEGRO_FONT* font1,* font2,* font3;
 };
 
 #endif

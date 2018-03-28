@@ -5,14 +5,13 @@
 #include "ui/CharacterMenuView.h"
 #include "ui/InventoryMenuView.h"
 #include "ui/GameView.h"
+#include "GameState.h"
+#include "LogicManager.h"
 
-InputManager::InputManager()
+void InputManager::Process (ALLEGRO_EVENT event)
 {
-    gameState = GameState::instance;
-}   
+    GameState* gameState = GameState::instance;
 
-void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
-{
     if(event.type == ALLEGRO_EVENT_KEY_DOWN)
     {    
         if(!gameState->menuCharacter && !gameState->menuInventory)
@@ -48,46 +47,46 @@ void InputManager::Process (ALLEGRO_EVENT event, LogicManager* logicManager)
                 //Numpad Movement
                 case ALLEGRO_KEY_PAD_7:
                     gameState->player->move(-1, -1); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
                 
                 case ALLEGRO_KEY_PAD_8:
                     gameState->player->move(0, -1);
-                    logicManager->step();
+                    LogicManager::step();
                     break;
                 
                 case ALLEGRO_KEY_PAD_9:
                     gameState->player->move(1, -1); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
 
                 case ALLEGRO_KEY_PAD_4:
                     gameState->player->move(-1, 0); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
                 
                 case ALLEGRO_KEY_PAD_5:
-                    logicManager->step();
+                    LogicManager::step();
                     break;
 
                 case ALLEGRO_KEY_PAD_6:
                     gameState->player->move(1, 0); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
 
                 case ALLEGRO_KEY_PAD_1:
                     gameState->player->move(-1, 1); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
 
                 case ALLEGRO_KEY_PAD_2:
                     gameState->player->move(0, 1); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
 
                 case ALLEGRO_KEY_PAD_3:
                     gameState->player->move(1, 1); 
-                    logicManager->step();
+                    LogicManager::step();
                     break;
             }
         }

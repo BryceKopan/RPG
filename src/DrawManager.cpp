@@ -7,18 +7,16 @@
 #include "CONSTANTS.h"
 #include "ResourceManager.h"
 
-DrawManager::DrawManager()
-{
-    gameState = GameState::instance;
-
-    font1 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 72);
-    font2 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 20);
-    font3 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 40);
-}
-
 void DrawManager::draw()
 {
-    //Save Relevent Data
+    ALLEGRO_FONT* font1 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 72);
+    ALLEGRO_FONT* font2 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 20);
+    ALLEGRO_FONT* font3 = ResourceManager::loadFont("res/fonts/merienda/Merienda-Regular.ttf", 40);
+    ALLEGRO_TRANSFORM transform;
+
+    GameState* gameState = GameState::instance;
+
+    //Store Relevent Data
     int playerX = gameState->player->location.x;
     int playerY = gameState->player->location.y;
     int tileWidth = gameState->chunk.tileMap.tileWidth;
@@ -57,7 +55,7 @@ void DrawManager::draw()
                 if(gameState->chunk.logicMap.map[i][k][j] != NULL)
                 {
                     Sprite sprite = gameState->chunk.logicMap.map[i][k][j]->sprite;
-            
+
                     al_draw_bitmap_region(
                             sprite.spriteSheet,
                             sprite.spriteSheetX,
@@ -104,7 +102,6 @@ void DrawManager::draw()
                     120, 245 + (30 * gameState->selectedAttribute),
                     ALLEGRO_ALIGN_RIGHT, ">"); 
         }
-
     }
 }
 

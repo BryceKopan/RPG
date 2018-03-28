@@ -1,19 +1,27 @@
-#ifndef GAMEMANAGER_H
-#define GAMEMANAGER_H
+#ifndef GAME_MANAGER_H
+#define GAME_MANAGER_H
 
 #include "core/TileMap.h"
 #include <iostream>
+#include <allegro5/allegro5.h>
 
-namespace GameManager
+class GameManager
 {
-    extern bool isRunning;
-    int const SCREEN_WIDTH = 800;
-    int const SCREEN_HEIGHT = 600;
+    public:
+        static bool isRunning;
+        static int const SCREEN_WIDTH = 800;
+        static int const SCREEN_HEIGHT = 600;
 
-    void init();
-    void loadGameData();
-    void gameLoop();
-    void shutdown();
-}
+        static void init();
+        static void loadGameData();
+        static void gameLoop();
+        static void shutdown();
+    private:
+        static const int FPS = 60;
+
+        static ALLEGRO_EVENT_QUEUE* eventQueue;
+        static ALLEGRO_TIMER* timer;
+        static ALLEGRO_DISPLAY* display;
+};
 
 #endif

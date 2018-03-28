@@ -2,14 +2,12 @@
 #include "core/TileMap.h"   
 #include "GameManager.h"
 #include <iostream>
-
-LogicManager::LogicManager()
-{
-    gameState = GameState::instance;
-}
+#include "GameState.h"
 
 void LogicManager::step()
 {
+    GameState* gameState = GameState::instance;
+
     gameState->player->update();
 
     for(int i = 0; i < gameState->npcs.size(); i++)
@@ -50,6 +48,8 @@ void LogicManager::step()
 
 void LogicManager::update()
 {
+    GameState* gameState = GameState::instance;
+
     gameState->textPool.update();
     gameState->currentView->update();
 }

@@ -2,16 +2,12 @@
 #define INPUT_MANAGER_H
 
 #include <allegro5/allegro5.h>
-#include "GameState.h" 
-#include "LogicManager.h"
 
 class InputManager
 {
     public:
-        InputManager();
-        void Process(ALLEGRO_EVENT, LogicManager* logicManager);
+        static void Process(ALLEGRO_EVENT);
     private:
-        GameState *gameState;
 };
 
 #endif
