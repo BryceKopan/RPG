@@ -91,17 +91,5 @@ void DrawManager::draw()
 
     //Draw UI
     gameState->currentView->draw();
-
-    //Menu
-    if(gameState->menuCharacter)
-    {
-        if(gameState->player->attributePoints > 0)
-        {
-            al_draw_text(font2,
-                    al_map_rgb(255, 255, 255),
-                    120, 245 + (30 * gameState->selectedAttribute),
-                    ALLEGRO_ALIGN_RIGHT, ">"); 
-        }
-    }
 }
 

@@ -13,7 +13,7 @@ class TextElement : public UIElement
         TextElement(int x, int y, ALLEGRO_FONT* font, ALLEGRO_COLOR color, int flag);
 
         void draw();
-    private:
+    protected:
         ALLEGRO_FONT* font;
         ALLEGRO_COLOR color;
         int flag;

@@ -4,6 +4,9 @@
 #include "../GameManager.h"
 #include "../GameState.h"
 #include "RectangleElement.h"
+#include "GameView.h"
+#include "InventoryMenuView.h"
+#include "SelectorElement.h"
 
 CharacterMenuView::CharacterMenuView()
 {
@@ -35,7 +38,7 @@ CharacterMenuView::CharacterMenuView()
 
     elements.push_back(new TextElement(125, 395, font1, white, ALLEGRO_ALIGN_LEFT));
 
-    update();
+    elements.push_back(new SelectorElement(120, 245, font1, white, ALLEGRO_ALIGN_RIGHT, 5, 30));
 }
 
 void CharacterMenuView::draw()
@@ -61,7 +64,7 @@ void CharacterMenuView::update()
     textElement = static_cast<TextElement*>(elements.at(i));
     textElement->text = text;
     i++;
-    
+
     text = "XP: " + std::to_string(player.currentXP) + "/" + std::to_string(player.nextLevelXP);
     textElement = static_cast<TextElement*>(elements.at(i));
     textElement->text = text;
@@ -101,8 +104,86 @@ void CharacterMenuView::update()
     textElement = static_cast<TextElement*>(elements.at(i));
     textElement->text = text;
     i++;
+
+    if(player.attributePoints > 0)
+    {
+        text = ">";
+    }
+    else
+    {
+        text = "";
+    }
+    textElement = static_cast<TextElement*>(elements.at(i));
+    textElement->text = text;
+    i++;
 }
 
 void CharacterMenuView::processInput(ALLEGRO_EVENT event)
 {
+    GameState* gameState = GameState::instance;
+
+    if(event.type == ALLEGRO_EVENT_KEY_DOWN)
+    {
+        switch(event.keyboard.keycode)
+        {
+            case ALLEGRO_KEY_ESCAPE:
+
+            case ALLEGRO_KEY_X:
+                delete gameState->currentView;
+                gameState->currentView = new GameView();
+                break;
+
+            case ALLEGRO_KEY_TAB:
+                delete gameState->currentView;
+                gameState->currentView = new InventoryMenuView();
+                break;
+        }
+        if(gameState->player->attributePoints > 0)
+        {
+            SelectorElement* selectorElement = 
+                static_cast<SelectorElement*>(elements.at(12));
+
+            switch(event.keyboard.keycode)
+            {
+                case ALLEGRO_KEY_DOWN:
+                    selectorElement->changeIndex(1);
+                    break;
+
+                case ALLEGRO_KEY_UP:
+                    selectorElement->changeIndex(-1);
+                    break;
+
+                case ALLEGRO_KEY_ENTER:
+                    switch(selectorElement->index)
+                    {
+                        case 0:
+                            gameState->player->attributes.strength++;
+                            break;
+
+                        case 1:
+                            gameState->player->attributes.dexterity++;
+                            break;
+
+                        case 2:
+                            gameState->player->attributes.toughness++;
+                            break;
+
+                        case 3:
+                            gameState->player->attributes.intelligence++;
+                            break;
+
+                        case 4:
+                            gameState->player->attributes.wisdom++;
+                            break;
+
+                        case 5:
+                            gameState->player->attributes.piety++;
+                            break;
+                    }
+                    gameState->player->attributePoints--;
+                    gameState->player->attributes.setMods();
+                    break;
+            }
+        }
+    }
 }

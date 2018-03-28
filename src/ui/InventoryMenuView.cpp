@@ -4,6 +4,9 @@
 #include "RectangleElement.h"
 #include "../ResourceManager.h"
 #include "../GameManager.h"
+#include "GameView.h"
+#include "CharacterMenuView.h"
+#include "../core/Weapon.h"
 
 InventoryMenuView::InventoryMenuView()
 {
@@ -49,4 +52,29 @@ void InventoryMenuView::update()
 
 void InventoryMenuView::processInput(ALLEGRO_EVENT event)
 {
+    GameState* gameState = GameState::instance;
+
+    if(event.type == ALLEGRO_EVENT_KEY_DOWN)
+    {
+        switch(event.keyboard.keycode)
+        {
+            case ALLEGRO_KEY_ESCAPE:
+
+            case ALLEGRO_KEY_I:
+                delete gameState->currentView;
+                gameState->currentView = new GameView();
+                break;
+
+            case ALLEGRO_KEY_TAB:
+                delete gameState->currentView;
+                gameState->currentView = new CharacterMenuView();
+                break;
+
+            case ALLEGRO_KEY_E:
+                Weapon* weapon = static_cast<Weapon*>(gameState->player->items.at(0));
+                weapon->equip(gameState->player);
+                break;
+        }
+    }
 }
+
