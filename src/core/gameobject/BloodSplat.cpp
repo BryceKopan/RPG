@@ -5,6 +5,6 @@
 BloodSplat::BloodSplat(int x, int y) : 
     GameObject(x , y, 0, false)
 {
-    Sprite sprite(ResourceManager::loadBitmap("res/BloodSplat.png"), 0, 0);
+    Sprite sprite(ResourceManager::loadBitmap("res/BloodSplat.png"));
     this->sprite = sprite;
 }

@@ -11,8 +11,8 @@ NPC::NPC(int x, int y, int z, int health) :
     this->sprite = sprite;
 }
 
-void NPC::update()
+void NPC::step()
 {
-    Agent::update();
+    Agent::step();
     ai.step(this);
 }

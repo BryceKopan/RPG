@@ -4,10 +4,12 @@ LogicMap::~LogicMap()
 {
     for(int i = 0; i < CHUNK_SIZE; i++)
     {
-        for(int k = 0; k < CHUNK_SIZE; k++)
+        for(int j = 0; j < CHUNK_SIZE; j++)
         {
-            delete map[i][k][0];
-            delete map[i][k][1];
+            for(int k = 0; k < depth; k++)
+            {
+                delete map[i][j][k];
+            }
         }
     }
 }

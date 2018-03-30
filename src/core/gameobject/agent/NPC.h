@@ -11,7 +11,7 @@ class NPC : public Agent
 
         NPC(int x, int y, int z, int health);
 
-        void update();
+        void step();
     private:
 };
 

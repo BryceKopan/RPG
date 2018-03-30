@@ -8,13 +8,13 @@ void LogicManager::step()
 {
     GameState* gameState = GameState::instance;
 
-    gameState->player->update();
+    gameState->player->step();
 
     for(int i = 0; i < gameState->npcs.size(); i++)
     {
         if(gameState->npcs[i]->currentHealth <= 0)
         {
-            gameState->npcs[i]->killed();
+            gameState->npcs[i]->onDeath();
             gameState->chunk.logicMap.map[gameState->npcs[i]->location.x][gameState->npcs[i]->location.y][0] = NULL;
             delete gameState->npcs[i];
             gameState->npcs.erase(gameState->npcs.begin() + i);
@@ -22,7 +22,7 @@ void LogicManager::step()
         }
         else
         {
-            gameState->npcs[i]->update();
+            gameState->npcs[i]->step();
         }
     }
 

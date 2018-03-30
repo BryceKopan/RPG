@@ -88,7 +88,7 @@ void Agent::move(int dX, int dY)
     }
 }
 
-void Agent::update()
+void Agent::step()
 {
     regenTime++;
 
@@ -113,7 +113,7 @@ void Agent::update()
     }
 }
 
-void Agent::killed()
+void Agent::onDeath()
 {
     Chunk* chunk = &GameState::instance->chunk; 
     

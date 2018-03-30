@@ -29,7 +29,7 @@ void Armor::unequip(Agent agent)
 {
     for(int i = 0; i < agent.equipment.size(); i++)
     {
-        if(agent.equipment.at(i)->slot == slot)
+        if(this == agent.equipment.at(i))
         {
             agent.equipment.erase(agent.equipment.begin() + i);
             agent.armor -= armor;

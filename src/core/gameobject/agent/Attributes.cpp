@@ -2,13 +2,6 @@
 
 Attributes::Attributes()
 {
-    strength = 10;
-    dexterity = 10;
-    toughness = 10;
-    intelligence = 10;
-    wisdom = 10;
-    piety = 10;
-
     setMods();
 }
 
@@ -32,7 +25,6 @@ void Attributes::setMods()
     intMod = calculateMod(intelligence);
     wisMod = calculateMod(wisdom);
     pieMod = calculateMod(piety);
-    
 }
 
 void Attributes::globalStatIncrease()
@@ -44,6 +36,7 @@ void Attributes::globalStatIncrease()
     wisdom++;
     piety++;
 }
+
 int Attributes::calculateMod(int stat)
 {
     if(stat >= 10)
