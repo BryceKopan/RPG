@@ -2,7 +2,6 @@
 #define TILE_MAP_H
 
 #include <unordered_map>
-#include <allegro5/allegro5.h>
 
 #include "../CONSTANTS.h"
 #include "Tile.h"

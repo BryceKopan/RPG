@@ -1,7 +1,5 @@
 #include "ResourceManager.h"
 
-#include <sstream>
-#include <iostream>
 #include <allegro5/allegro_ttf.h>
 
 std::unordered_map<std::string, ALLEGRO_BITMAP*> ResourceManager::spriteMap;
@@ -17,7 +15,7 @@ ALLEGRO_BITMAP* ResourceManager::loadBitmap(std::string spritePath)
 
         if(!bitmap)
         {
-            std::cout << debugID << "Sprite not found\n";
+            printf("Sprite not found\n");
             bitmap = al_load_bitmap("res/ErrorTexture.png");
         }
 
@@ -29,20 +27,19 @@ ALLEGRO_BITMAP* ResourceManager::loadBitmap(std::string spritePath)
 
 ALLEGRO_FONT* ResourceManager::loadFont(std::string fontPath, int size)
 {
-    std::ostringstream hashPath;
-    hashPath << size << fontPath;
+    std::string hashPath = fontPath + std::to_string(size);
 
-    if(fontMap.find(hashPath.str()) == fontMap.end())
+    if(fontMap.find(hashPath) == fontMap.end())
     {
         ALLEGRO_FONT* font = al_load_ttf_font(fontPath.c_str(), size, 0); 
 
         if(!font)
         {
-            std::cout << debugID << "Font not found\n";
+            printf("Font not found\n");
         }
 
-        fontMap[hashPath.str()] = font;
+        fontMap[hashPath] = font;
     }
 
-    return fontMap[hashPath.str()];
+    return fontMap[hashPath];
 }

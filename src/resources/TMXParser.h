@@ -2,17 +2,13 @@
 #define TMX_PARSER_H
 
 #include <string>
-#include <vector>
-#include <pugixml.hpp>
-
-#include "../core/GameState.h"
 
 class TMXParser
 {
     public: 
         TMXParser();
 
-        void parseTMXFile(std::string xmlFilePath, GameState* gameState);
+        void parseTMXFile(std::string xmlFilePath);
     private:
         std::string debugID = "[TMXParser] ";
 };

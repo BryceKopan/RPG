@@ -9,7 +9,7 @@ class Sprite
         ALLEGRO_BITMAP* spriteSheet;
         int spriteSheetX, spriteSheetY;
 
-        Sprite();
+        Sprite(){};
         Sprite(ALLEGRO_BITMAP* spriteSheet, int spriteSheetX, int spriteSheetY);
     private:
 };

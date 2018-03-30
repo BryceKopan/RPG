@@ -11,7 +11,7 @@ class LogicMap
 
         GameObject* map[CHUNK_SIZE][CHUNK_SIZE][depth] = {{{NULL}}};
 
-        LogicMap();
+        LogicMap(){};
         ~LogicMap();
     private:
 };

@@ -8,7 +8,6 @@
 #include "InputManager.h"
 #include "LogicManager.h"
 #include "DrawManager.h"
-#include "../core/CONSTANTS.h"
 #include "../resources/TMXParser.h"
 #include "../graphics/ui/GameView.h"
 
@@ -69,7 +68,7 @@ void GameManager::init()
 void GameManager::loadGameData()
 {
     TMXParser tmxParser;
-    tmxParser.parseTMXFile("res/StartTemple2.tmx", GameState::instance);
+    tmxParser.parseTMXFile("res/StartTemple2.tmx");
 } 
 
 void GameManager::gameLoop()

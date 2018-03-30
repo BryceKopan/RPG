@@ -1,29 +1,30 @@
 #include "TMXParser.h"
 
-#include <iostream>
+#include <pugixml.hpp>
 
+#include "../core/GameState.h"
 #include "../core/CONSTANTS.h"
-#include "../core/gameobject/agent/NPC.h"
-#include "../core/gameobject/agent/DamageSource.h"
 #include "../managers/ResourceManager.h"
 
 TMXParser::TMXParser()
 {
 }
 
-void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
+void TMXParser::parseTMXFile(std::string xmlFilePath)
 {
+    GameState* gameState = GameState::instance;
+
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(xmlFilePath.c_str());
 
-    std::cout << debugID << "Document loading - " << result.description() << "\n";
+    printf("%sDocument loading - %s\n", debugID.c_str(), result.description());
 
     pugi::xml_node root = doc.document_element();
 
     if(root.attribute("width").as_int() != CHUNK_SIZE || 
             root.attribute("height").as_int() != CHUNK_SIZE)
     {
-        std::cout << debugID << "TMX map is not 64 x 64" << "\n";
+        printf("%sTMX map is not 64 x 64\n", debugID.c_str());
     }
 
     int tileWidth = root.attribute("tilewidth").as_int();
@@ -31,7 +32,7 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
 
     if(tileWidth != tileHeight)
     {
-        std::cout << debugID << "Warning: Tiles aren't square" << "\n";
+        printf("%sWarning: Tiles aren't square\n", debugID.c_str());
     }
 
     gameState->chunk.tileMap.tileWidth = tileWidth;
@@ -118,12 +119,12 @@ void TMXParser::parseTMXFile(std::string xmlFilePath, GameState* gameState)
                 break;    
 
             defualt:
-                std::cout << debugID << "Logic object: " << t << " has not been implemented\n";
+                printf("%sLogic object: %i has not been implemented\n", debugID.c_str(), t); 
                 break;
         }
 
         currentNode = currentNode.next_sibling();
     }
     
-    std::cout << debugID << "TMX parsing finished \n";  
+    printf("%sTMX parsing finished\n", debugID.c_str());
 }

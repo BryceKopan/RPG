@@ -1,9 +1,5 @@
 #include "LogicMap.h"
 
-LogicMap::LogicMap()
-{
-}
-
 LogicMap::~LogicMap()
 {
     for(int i = 0; i < CHUNK_SIZE; i++)

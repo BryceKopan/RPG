@@ -43,5 +43,4 @@ void TextPool::addParticle(int x, int y, int dX, int dY, int life, std::string t
         pool[particleCount].set(x, y, dX, dY, life, text, r, g, b);
         particleCount ++;
     }
-
 }

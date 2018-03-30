@@ -10,7 +10,6 @@ class Attack
         int damage, armorPen, hitChance;
 
         Attack(DamageSource damageSource, int hitChance, Attributes attributes);
-    private:
 };
 
 #endif

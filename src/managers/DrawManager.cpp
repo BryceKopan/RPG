@@ -1,10 +1,5 @@
 #include "DrawManager.h"
 
-#include <sstream>
-#include <iostream>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_primitives.h>
-
 #include "GameManager.h"
 #include "ResourceManager.h"
 #include "../core/CONSTANTS.h"
@@ -94,4 +89,3 @@ void DrawManager::draw()
     //Draw UI
     gameState->currentView->draw();
 }
-

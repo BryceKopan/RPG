@@ -1,8 +1,6 @@
 #include "Agent.h"
 
 #include <cmath>
-#include <sstream>
-#include <iostream>
 #include <stdlib.h>
 
 #include "../BloodSplat.h"
@@ -22,7 +20,7 @@ Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
 
 bool Agent::attacked(Attack attack)
 {
-    std::ostringstream text;
+    std::string text;
 
     //reset regen time
     regenTime = 0;
@@ -34,11 +32,11 @@ bool Agent::attacked(Attack attack)
     {
         attack.damage -= attack.damage * ((armor * 5) / 100);
         currentHealth -= attack.damage;
-        text << attack.damage;
+        text = std::to_string(attack.damage);
     }
     else
     {
-        text << "miss";
+        text = "miss";
     }
 
     int tileWidth = GameState::instance->chunk.tileMap.tileWidth;
@@ -49,7 +47,7 @@ bool Agent::attacked(Attack attack)
             (location.x * tileWidth) + (tileWidth / 2), 
             (location.y * tileHeight) - (tileHeight / 2), 
             0, -1, 100, 
-            text.str().c_str(), 
+            text, 
             255, 0, 0);
 
     if(currentHealth <= 0)
@@ -71,11 +69,6 @@ void Agent::move(int dX, int dY)
     }
     else if(chunk->logicMap.map[location.x + dX][location.y + dY][0] != NULL)
     {
-        if(GameState::instance->debugMode == true)
-        {
-            std::cout << "Agent Attacking \n";
-        }
-
         Attack attack(damageSource, hitChance, attributes);
 
         if(chunk->logicMap.map[location.x + dX][location.y + dY][0]->
