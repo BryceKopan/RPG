@@ -6,9 +6,7 @@
 #include "../core/CONSTANTS.h"
 #include "../managers/ResourceManager.h"
 
-TMXParser::TMXParser()
-{
-}
+const std::string TMXParser::debugID = "[TMXParser] ";
 
 void TMXParser::parseTMXFile(std::string xmlFilePath)
 {

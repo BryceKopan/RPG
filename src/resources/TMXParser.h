@@ -6,11 +6,9 @@
 class TMXParser
 {
     public: 
-        TMXParser();
-
-        void parseTMXFile(std::string xmlFilePath);
+        static void parseTMXFile(std::string xmlFilePath);
     private:
-        std::string debugID = "[TMXParser] ";
+        static const std::string debugID;
 };
 
 #endif

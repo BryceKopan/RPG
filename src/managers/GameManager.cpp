@@ -67,8 +67,7 @@ void GameManager::init()
 
 void GameManager::loadGameData()
 {
-    TMXParser tmxParser;
-    tmxParser.parseTMXFile("res/StartTemple2.tmx");
+    TMXParser::parseTMXFile("res/StartTemple2.tmx");
 } 
 
 void GameManager::gameLoop()
