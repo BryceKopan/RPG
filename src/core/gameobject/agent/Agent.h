@@ -23,10 +23,9 @@ class Agent : public GameObject
         Agent(int x, int y, int z, int maxHealth, DamageSource damageSource);
 
         void move(int dX, int dY);
-        bool attacked(Attack attack);
-        void step();
-        void onDeath();
-    private:
+        void attacked(Attack attack);
+        virtual void step();
+        virtual void onDeath(){};
 };
 
 #endif

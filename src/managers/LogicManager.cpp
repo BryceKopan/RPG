@@ -10,28 +10,19 @@ void LogicManager::step()
 
     gameState->player->step();
 
-    for(int i = 0; i < gameState->npcs.size(); i++)
+    for(int i = 0; i < gameState->agents.size(); i++)
     {
-        if(gameState->npcs[i]->currentHealth <= 0)
-        {
-            gameState->npcs[i]->onDeath();
-            gameState->chunk.logicMap.map[gameState->npcs[i]->location.x][gameState->npcs[i]->location.y][0] = NULL;
-            delete gameState->npcs[i];
-            gameState->npcs.erase(gameState->npcs.begin() + i);
+        gameState->agents[i]->step();
 
-        }
-        else
+        for(int j = 0; j < gameState->deadAgents.size(); j++)
         {
-            gameState->npcs[i]->step();
+            gameState->deadAgents[i]->onDeath();
         }
+
+        gameState->deadAgents.clear();
     }
 
     gameState->turnNumber += 1;
-
-    if(gameState->player->currentHealth == 0)
-    {
-        GameManager::isRunning = false;
-    }
 }
 
 void LogicManager::update()

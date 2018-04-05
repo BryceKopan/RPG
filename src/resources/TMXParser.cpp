@@ -4,6 +4,7 @@
 
 #include "../core/GameState.h"
 #include "../core/CONSTANTS.h"
+#include "../core/gameobject/agent/NPC.h"
 #include "../managers/ResourceManager.h"
 
 const std::string TMXParser::debugID = "[TMXParser] ";
@@ -111,9 +112,9 @@ void TMXParser::parseTMXFile(std::string xmlFilePath)
                 break;
 
             case 63:
-                gameState->npcs.push_back(new NPC(x, y, 0, 5)); 
+                gameState->agents.push_back(new NPC(x, y, 0, 5)); 
                 gameState->chunk.logicMap.map[x][y][0] = 
-                    gameState->npcs.at(gameState->npcs.size() - 1);
+                    gameState->agents.at(gameState->agents.size() - 1);
                 break;    
 
             defualt:

@@ -3,7 +3,6 @@
 #include <cmath>
 #include <stdlib.h>
 
-#include "../BloodSplat.h"
 #include "../../GameState.h"
 #include "../../world/Chunk.h"
 #include "../../item/Weapon.h"
@@ -18,8 +17,9 @@ Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
     items.push_back(new Weapon("Sword", weapon, DamageSource(10,10,10,10,10)));
 }
 
-bool Agent::attacked(Attack attack)
+void Agent::attacked(Attack attack)
 {
+    GameState* gameState = GameState::instance;
     std::string text;
 
     //reset regen time
@@ -52,11 +52,7 @@ bool Agent::attacked(Attack attack)
 
     if(currentHealth <= 0)
     {
-        return true;
-    }
-    else
-    {
-        return false;
+        gameState->deadAgents.push_back(this);
     }
 }
 
@@ -71,11 +67,8 @@ void Agent::move(int dX, int dY)
     {
         Attack attack(damageSource, hitChance, attributes);
 
-        if(chunk->logicMap.map[location.x + dX][location.y + dY][0]->
-                attacked(attack))
-        {
-            currentXP += 10;
-        }
+        chunk->logicMap.map[location.x + dX][location.y + dY][0]->
+                attacked(attack);
     }
     else
     {
@@ -111,12 +104,4 @@ void Agent::step()
         maxHealth += level + attributes.tghMod;
         currentHealth = maxHealth;
     }
-}
-
-void Agent::onDeath()
-{
-    Chunk* chunk = &GameState::instance->chunk; 
-    
-    chunk->logicMap.map[location.x][location.y][1] =
-        new BloodSplat(location.x, location.y);
 }

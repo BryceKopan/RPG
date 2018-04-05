@@ -17,7 +17,6 @@ class GameObject
 
         GameObject(int x, int y, int z, bool collidable);
 
-        virtual bool attacked(Attack Attack){};
+        virtual void attacked(Attack Attack){};
 };
-
 #endif

@@ -7,7 +7,8 @@ class Player : public Agent
 {
     public:
         Player(int x, int y, int z, int health);
-    private:
+        
+        void onDeath();
 };
 
 #endif

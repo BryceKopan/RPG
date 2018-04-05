@@ -12,6 +12,7 @@ class NPC : public Agent
         NPC(int x, int y, int z, int health);
 
         void step();
+        void onDeath();
     private:
 };
 
