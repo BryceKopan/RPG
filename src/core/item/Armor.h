@@ -10,8 +10,8 @@ class Armor : public Equipment
 
         Armor(std::string name, Slot slot, int armor, int dodge);
 
-        bool equip(Agent agent);
-        void unequip(Agent agent);
+        //bool equip(Agent agent);
+        //void unequip(Agent agent);
     private:
 };
 

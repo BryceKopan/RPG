@@ -1,12 +1,16 @@
 #include "Weapon.h"
 
-Weapon::Weapon(std::string name, Slot slot, DamageSource damageSource) : 
+Weapon::Weapon(std::string name, Slot slot, int minDamage, int maxDamage, int bonusDamage, int armorPen, int accuracy) : 
     Equipment(name, slot)
 {
-    this->damageSource = damageSource;
+    this->minDamage = minDamage;
+    this->maxDamage = maxDamage;
+    this->bonusDamage = bonusDamage;
+    this->armorPen = armorPen;
+    this->accuracy = accuracy;
 }
 
-bool Weapon::equip(Agent* agent)
+/*bool Weapon::equip(Agent* agent)
 {
     for(int i = 0; i < agent->equipment.size(); i++)
     {
@@ -16,7 +20,7 @@ bool Weapon::equip(Agent* agent)
         }
     }
 
-    agent->damageSource = damageSource;
+    agent->equippedWeapon = this;
     agent->equipment.push_back(this);
     equipped = true;
 
@@ -34,4 +38,11 @@ void Weapon::unequip(Agent agent)
             equipped = false;
         }
     }
+}*/
+
+int Weapon::getDamage()
+{
+    int damage = rand() % (maxDamage - minDamage + 1) + minDamage;
+    damage += bonusDamage;
+    return damage;
 }

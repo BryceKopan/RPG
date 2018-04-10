@@ -73,7 +73,7 @@ void InventoryMenuView::processInput(ALLEGRO_EVENT event)
 
             case ALLEGRO_KEY_E:
                 Weapon* weapon = static_cast<Weapon*>(gameState->player->items.at(0));
-                weapon->equip(gameState->player);
+                gameState->player->equip(weapon);
                 break;
         }
     }

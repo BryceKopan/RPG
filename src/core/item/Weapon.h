@@ -2,17 +2,20 @@
 #define WEAPON_H
 
 #include "Equipment.h"
-#include "../gameobject/agent/DamageSource.h"
+#include "Slot.h"
+
+//class Agent;
 
 class Weapon : public Equipment
 {
     public:
-        DamageSource damageSource;
+        int minDamage, maxDamage, bonusDamage, armorPen, accuracy;
 
-        Weapon(std::string name, Slot slot, DamageSource damageSource);
+        Weapon(std::string name, Slot slot, int minDamage, int maxDamage, int bonusDamage, int armorPen, int accuracy);
 
-        bool equip(Agent* agent);
-        void unequip(Agent agent);
+        //bool equip(Agent* agent);
+        //void unequip(Agent agent);
+        int getDamage();
     private:
 };
 

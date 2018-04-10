@@ -3,7 +3,6 @@
 
 #include <string>
 
-#include "agent/Attack.h"
 #include "../Sprite.h"
 #include "../Location.h"
 
@@ -16,7 +15,5 @@ class GameObject
         std::string name;
 
         GameObject(int x, int y, int z, bool collidable);
-
-        virtual void attacked(Attack Attack){};
 };
 #endif

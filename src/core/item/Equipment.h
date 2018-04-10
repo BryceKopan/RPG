@@ -2,11 +2,10 @@
 #define EQUIPMENT_H
 
 #include "Item.h"
-#include "../gameobject/agent/Agent.h"
+#include "Slot.h"
+//#include "../gameobject/agent/Agent.h"
 
-class Agent;
-
-enum Slot {head, chest, legs, weapon};
+//class Agent;
 
 class Equipment : public Item
 {
@@ -16,8 +15,8 @@ class Equipment : public Item
 
         Equipment(std::string name, Slot slot);
 
-        virtual bool equip(Agent* agent) = 0;
-        virtual void unequip(Agent agent) = 0;
+        //virtual bool equip(Agent* agent) = 0;
+        //virtual void unequip(Agent agent) = 0;
     private:
 };
 

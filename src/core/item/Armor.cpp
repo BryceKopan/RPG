@@ -7,7 +7,7 @@ Armor::Armor(std::string name, Slot slot, int armor, int dodge) :
     this->dodge = dodge;
 }
 
-bool Armor::equip(Agent agent)
+/*bool Armor::equip(Agent agent)
 {
     for(int i = 0; i < agent.equipment.size(); i++)
     {
@@ -37,4 +37,4 @@ void Armor::unequip(Agent agent)
             equipped = false;
         }
     }
-}
+}*/

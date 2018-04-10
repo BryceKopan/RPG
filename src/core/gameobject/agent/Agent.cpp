@@ -5,34 +5,39 @@
 
 #include "../../GameState.h"
 #include "../../world/Chunk.h"
-#include "../../item/Weapon.h"
 
-Agent::Agent (int x, int y, int z, int maxHealth, DamageSource damageSource) :
+Agent::Agent (int x, int y, int z, int maxHealth) :
     GameObject(x, y, z, true)
 {
     this->maxHealth = maxHealth;
     this->currentHealth = maxHealth;
-    this->damageSource = damageSource;
     attributes = Attributes();
-    items.push_back(new Weapon("Sword", weapon, DamageSource(10,10,10,10,10)));
+    items.push_back(new Weapon("Sword", weapon, 10,10,10,10,10));
 }
 
-void Agent::attacked(Attack attack)
+void Agent::attack(Agent* agent)
 {
     GameState* gameState = GameState::instance;
     std::string text;
+    int hitChance, damage;
 
     //reset regen time
-    regenTime = 0;
+    agent->regenTime = 0;
 
-    //Process Attack
-    attack.hitChance -= ((dodge + attributes.dexMod) * 5);
+    //calculate hit chance
+    hitChance = this->hitChance;
+    hitChance -= ((agent->dodge + agent->attributes.dexMod) * 5);
+    hitChance += ((equippedWeapon->accuracy + attributes.dexMod) * 5);
 
     if(rand() % 100 < hitChance)
     {
-        attack.damage -= attack.damage * ((armor * 5) / 100);
-        currentHealth -= attack.damage;
-        text = std::to_string(attack.damage);
+        //calculate damage
+        //armorPen not taken into account
+        damage = equippedWeapon->getDamage();
+        damage -= damage * ((agent->armor * 5) / 100);
+
+        agent->currentHealth -= damage;
+        text = std::to_string(damage);
     }
     else
     {
@@ -44,15 +49,15 @@ void Agent::attacked(Attack attack)
 
     //Create particle that shows damage
     GameState::instance->textPool.addParticle(
-            (location.x * tileWidth) + (tileWidth / 2), 
-            (location.y * tileHeight) - (tileHeight / 2), 
+            (agent->location.x * tileWidth) + (tileWidth / 2), 
+            (agent->location.y * tileHeight) - (tileHeight / 2), 
             0, -1, 100, 
             text, 
             255, 0, 0);
 
-    if(currentHealth <= 0)
+    if(agent->currentHealth <= 0)
     {
-        gameState->deadAgents.push_back(this);
+        gameState->deadAgents.push_back(agent);
     }
 }
 
@@ -65,10 +70,8 @@ void Agent::move(int dX, int dY)
     }
     else if(chunk->logicMap.map[location.x + dX][location.y + dY][0] != NULL)
     {
-        Attack attack(damageSource, hitChance, attributes);
-
-        chunk->logicMap.map[location.x + dX][location.y + dY][0]->
-                attacked(attack);
+        Agent* agent = static_cast<Agent*>(chunk->logicMap.map[location.x + dX][location.y + dY][0]);
+        attack(agent);
     }
     else
     {
@@ -104,4 +107,19 @@ void Agent::step()
         maxHealth += level + attributes.tghMod;
         currentHealth = maxHealth;
     }
+}
+
+void Agent::equip(Weapon* weapon)
+{
+    for(int i = 0; i < equipment.size(); i++)
+    {
+        if(equipment.at(i)->slot == weapon->slot)
+        {
+            return;
+        }
+    }
+
+    equippedWeapon = weapon;
+    equipment.push_back(weapon);
+    weapon->equipped = true;
 }
